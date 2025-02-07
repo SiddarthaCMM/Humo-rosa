@@ -19,6 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            /*Para que al borrar un rol se borren todos en casacada*/
+            /*Aquí también se encuentra la forma de introducir más foreign keys */
+            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
+
             $table->rememberToken();
             $table->timestamps();
         });
