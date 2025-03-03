@@ -27,6 +27,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/
+/*
 Route::group(['middleware' => ['auth']], function() {
     Route::view('/', 'welcome');
 });
+*/
