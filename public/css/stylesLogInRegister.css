@@ -126,7 +126,7 @@ input[type="password"] {
     cursor: pointer;
 }
 
-button[type="submit"] {
+.submitButton{
     align-items: center;
     background-color: #ff6b6b;
     color: #fff;
@@ -139,7 +139,7 @@ button[type="submit"] {
     font-family: 'Poppins', sans-serif;
 }
 
-button[type="submit"]:hover {
+.submitButton:hover {
     background-color: #ff4b4b;
 }
 
