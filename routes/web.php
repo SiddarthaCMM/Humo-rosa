@@ -25,6 +25,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/catalogue', function () {
+    return view('catalogue'); // Carga la vista inicio.blade.php
+});
+
+
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/
 /*

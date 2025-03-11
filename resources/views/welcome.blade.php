@@ -45,7 +45,7 @@
                         </li>
       
                         <li class="nav__item">
-                           <a href="#" class="nav__link">
+                           <a href="{{ url('/catalogue') }}" class="nav__link">
                               <i class="ri-arrow-right-up-line"></i>
                               <span>Productos</span>
                            </a>

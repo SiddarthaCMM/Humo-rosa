@@ -1,0 +1,175 @@
+body{
+    background-color: #FAEEEE;
+}
+
+#catalogoSection{
+    padding: 40px;
+}
+
+#catalogoSorts {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.catalogoButton {
+    text-decoration: none;
+    color: #DDA1A1;
+    font-weight: bold;
+    padding-bottom: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom: thin solid #FAEEEE;
+}
+
+.catalogoButton:hover {
+    text-decoration: none;
+    color: #DDA1A1;
+    border-bottom: thin solid #DDA1A1;
+}
+
+.catalogoButton.activo {
+    border-bottom: thin solid #DDA1A1;
+}
+
+#objectsSection {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 240px;
+    padding-right: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card a{
+    text-decoration: none;
+    color: #DDA1A1;
+}
+
+.card a:hover{
+    color: #DDA09E;
+}
+
+/* ICONS*/
+
+.icono{
+    width: 20px;
+    height: 20px;
+}
+
+ /* CARDS */
+
+.card {
+    border-radius: 30px;
+    min-width: 180px;
+    max-width: 300px;
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card img {
+    border-radius: 30px 30px 0 0;
+    width: 100%;
+    height: auto;
+}
+
+.row{
+  margin-left: 5px;
+}
+
+.col-4{
+  display: inline-flex;
+}
+
+.button-buy {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.custom-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-collection {
+    background-color: #e8b5a2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 700;
+}
+.btn-collection:hover {
+    background-color: #d99a8c;
+}
+
+.card-title{
+  color: black;
+}
+
+.card-text{
+  color: grey;
+}
+
+.flex-column{
+  color: #ffff;
+}
+
+@media (max-width: 768px) {
+    #objectsSection {
+        justify-content: center;
+    }
+
+    .card {
+        flex: 1 1 100%;
+        max-width: 90%;
+    }
+}
+
+/* Footer */
+#gradient-background {
+    background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
+    background-size:180% 180%;
+    animation:gradient-animation 18s ease infinite;
+}
+
+#gradient-background a{
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+  }
+  
+a {
+    text-decoration: none;
+}
+
+
+
+@keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+}
