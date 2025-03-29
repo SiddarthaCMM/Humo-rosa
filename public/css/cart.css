@@ -1,0 +1,31 @@
+body{
+    font-family: "Onest", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 20px;
+    font-style: normal;
+}
+
+.modal-dialog {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 0;
+    width: 400px; /* Ajusta el tamaño si lo deseas */
+    background-color: #F7E8E5;
+}
+
+.sized{
+    display: flex;
+}
+
+hr{
+    color: #A57268;
+}
+
+.modal-header{
+    background-color: #DDA09E;
+}
+
+.modal-body{
+    background-color: #F7E8E5;
+}

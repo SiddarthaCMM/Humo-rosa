@@ -4,6 +4,45 @@
 <link rel="stylesheet" href="{{ asset('css/stylesCatalogo.css') }}">
 
 <body>
+
+<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true" data-bs-backdrop="false">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+            <h5 class="modal-title" id="miModalLabel" style="color: white;">Carrito (n item/items)</h5>
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <!--Card para poner los objetos en el carrito-->
+                <div class="container-sm sized">
+                    <img src="https://placehold.co/120x140" alt="">
+                    <div class="container-sm">
+                        <p>Black Stones Cake</p>
+                        <p>$249.99</p>
+                        <div class="input-group" style="width: 120px;">
+                            <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
+                            <input type="text" id="quantity" class="form-control text-center" value="1" readonly>
+                            <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
+                        </div>
+                    </div>
+                </div> 
+ 
+                <hr>
+                <!--Resultado del carrito-->
+                <div class="container-sm sized">
+                    <p class="col-10">Subtotal</p><p class="col-2">$249.99</p>
+                </div> 
+
+                <div class="d-grid gap-2">
+                    <a href="{{ route('payment') }}" class="btn btn-primary" style="background-color: #DCB9B2;">Ver Carrito</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <div id="catalogoSorts" class="container-fluid d-flex flex-wrap">
         <button class="catalogoButton" onclick="marcarActivo(event)">Todo</button>
         <button class="catalogoButton" onclick="marcarActivo(event)">Velas Anime</button>
