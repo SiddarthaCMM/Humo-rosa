@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
 
             /*Para que al borrar un rol se borren todos en casacada*/
             /*Aquí también se encuentra la forma de introducir más foreign keys */
-            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
 
             $table->rememberToken();
             $table->timestamps();
