@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,12 @@ use App\Http\Controllers\RoleController;
 */
 
 Route::view('/', 'welcome');
+
+// Ruta para mostrar el formulario de creación
+Route::get('/create', [ProductController::class, 'create'])->name('create');
+
+// Ruta para almacenar el producto
+Route::post('/create', [ProductController::class, 'store'])->name('store');
 
 Route::get('crear-rol', [RoleController::class, 'create']);
 Route::get('ver-rol', [RoleController::class, 'index']);
