@@ -16,8 +16,6 @@
         <button class="catalogoButton" onclick="marcarActivo(event)">Velas Celebridades</button>
         <button class="catalogoButton" onclick="marcarActivo(event)">Velas Aromáticas</button>
         <button class="catalogoButton" onclick="marcarActivo(event)">Cosmética Natural</button>
-        <button class="catalogoButton" onclick="marcarActivo(event)">Personalizados</button>
-        <button class="catalogoButton" onclick="marcarActivo(event)">De temporada</button>
     </div>
 
     <div class="container-sm sized">

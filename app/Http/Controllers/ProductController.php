@@ -10,10 +10,10 @@ class ProductController extends Controller
     /**
      * Muestra una lista de productos.
      */
-    public function index()
+    public function showCatalog()
     {
-        $products = Product::all(); // Obtén todos los productos
-        return view('products.index', compact('products')); // Asegúrate de que 'products.index' sea la vista correcta
+        $products = Product::all(); // O cualquier otro método que utilices para obtener los productos
+        return view('catalogue', compact('products'));
     }
 
     /**

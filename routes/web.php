@@ -23,6 +23,9 @@ Route::get('/create', [ProductController::class, 'create'])->name('create');
 // Ruta para almacenar el producto
 Route::post('/create', [ProductController::class, 'store'])->name('store');
 
+//Obtener productos para el catalogo
+Route::get('/catalogue', [App\Http\Controllers\ProductController::class, 'showCatalog'])->name('catalogue');
+
 Route::get('crear-rol', [RoleController::class, 'create']);
 Route::get('ver-rol', [RoleController::class, 'index']);
 Route::get('actualizar-rol', [RoleController::class, 'update']);
@@ -31,10 +34,6 @@ Route::get('eliminar-rol', [RoleController::class, 'delete']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/catalogue', function () {
-    return view('catalogue'); // Carga la vista inicio.blade.php
-});
 
 Route::get('/payment', function () {
     return view('payment');
