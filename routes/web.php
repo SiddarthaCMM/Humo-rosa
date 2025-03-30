@@ -29,6 +29,10 @@ Route::get('/catalogue', function () {
     return view('catalogue'); // Carga la vista inicio.blade.php
 });
 
+Route::get('/payment', function () {
+    return view('payment');
+})->name('payment');
+
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/
