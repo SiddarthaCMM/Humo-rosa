@@ -3,11 +3,13 @@
 @section('content')  
 <link rel="stylesheet" href="{{ asset('css/stylesLogInRegister.css') }}">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
 
 <body class="login-page">
         <div class="login-container">
-            <h1>¡Bienvenido!</h1>
-            <h2>Iniciar Sesion</h2>
+            <h2>¡Bienvenido!</h2>
+            <h3>Iniciar Sesion</h3>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                     <label for="email">Email</label>
@@ -53,8 +55,8 @@
         </div> 
         
         <div class ="register-container">
-            <h1>¡Bienvenido!</h1>
-            <h2>Registrate</h2>
+            <h2>¡Bienvenido!</h2>
+            <h3>Registrate</h3>
             <form method="POST" action="{{ route('register') }}">
             @csrf
                 <label for="email">Email</label>

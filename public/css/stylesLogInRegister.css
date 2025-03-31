@@ -9,6 +9,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Onest", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    text-decoration: none;
+    color: #ffff;
+    background-color: #F7E8E5;
 }
 
 .login-page main {
@@ -17,9 +24,9 @@ body {
 
 .login-container{
     background-color: #efe0db;
-    width: 325px;
+    width: 340px;
     height: 620px;
-    padding: 20px;
+    padding-bottom: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -196,4 +203,8 @@ input[type="password"] {
     cursor: pointer;
     pointer-events: auto;
     
+}
+
+.email{
+    margin-left: 20px;
 }

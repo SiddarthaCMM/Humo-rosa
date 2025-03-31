@@ -2,6 +2,9 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/stylesCatalogo.css') }}">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+
 
 <body>
     <div id="catalogoSorts" class="container-fluid d-flex flex-wrap">
@@ -21,7 +24,8 @@
                 <p style="color: #A57268;">Vasito de Fresa</p>
                 <p style="color: #FF0000;">$249.99</p>
                 <div class="button-buy">
-                    <a href="#">
+                    <a class="pucharse"href="#">
+                        Agregar al carrito
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                             <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                         </svg>
@@ -37,6 +41,7 @@
                 <p style="color: #FF0000;">$199.99</p>
                 <div class="button-buy">
                     <a href="#">
+                        Agregar al carrito
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                             <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                         </svg>
@@ -52,6 +57,7 @@
                 <p style="color: #FF0000;">$219.99</p>
                 <div class="button-buy">
                     <a href="#">
+                        Agregar al carrito
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                             <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                         </svg>
@@ -67,6 +73,7 @@
                 <p style="color: #FF0000;">$219.99</p>
                 <div class="button-buy">
                     <a href="#">
+                        Agregar al carrito
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                             <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                         </svg>
@@ -82,6 +89,7 @@
                 <p style="color: #FF0000;">$219.99</p>
                 <div class="button-buy">
                     <a href="#">
+                         Agregar al carrito
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                             <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                         </svg>
@@ -89,7 +97,22 @@
                 </div>
             </div>
         </div>
-        
+    
+        <div class="card">
+            <img src="https://placehold.co/180x130" class="img-fluid" alt="Producto 3">
+            <div class="p-2 text-center">
+                <p style="color: #A57268;">Vasito de Mango</p>
+                <p style="color: #FF0000;">$219.99</p>
+                <div class="button-buy">
+                    <a href="#">
+                        Agregar al carrito
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
 
     </div>
 
