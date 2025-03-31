@@ -1,0 +1,119 @@
+body{
+    background-color: #FAEEEE;
+    font-family: "Onest", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 20px;
+    font-style: normal;
+}
+
+hr{
+    color: #DDA1A1;
+}
+
+a{
+    color: #A57268;
+    text-decoration: none;
+}
+
+#catalogoSection{
+    padding: 40px;
+}
+
+#catalogoSorts {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.catalogoButton {
+    text-decoration: none;
+    color: #DDA1A1;
+    font-weight: bold;
+    padding-bottom: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom: thin solid #FAEEEE;
+}
+
+.catalogoButton:hover {
+    text-decoration: none;
+    color: #DDA1A1;
+    border-bottom: thin solid #DDA1A1;
+}
+
+.catalogoButton.activo {
+    border-bottom: thin solid #DDA1A1;
+}
+
+.sized{
+    display: flex;
+    
+}
+
+.container-sm{
+    border-radius: 30px;
+}
+
+.container-sm p{
+    font-weight: bold;
+}
+
+.sizedcolor{
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .sized {
+        flex-direction: column;
+        align-items: center; /* Centra los elementos en el eje horizontal */
+        justify-content: center; /* Centra los elementos en el eje vertical */
+    }
+
+    /* Se asegura que los elementos dentro de "sized" se apilen verticalmente */
+    .container-sm.sizedcolor {
+        width: 100%; /* Hace que los contenedores ocupen todo el ancho */
+        margin-bottom: 20px; /* Añade espacio entre los contenedores */
+        text-align: center; /* Centra el texto dentro del contenedor */
+    }
+
+    /* Resumen de la compra */
+    .container-sm.sizedcolor.col-4 {
+        width: 100%;
+        margin-top: 20px; 
+        text-align: center;
+    }
+
+    .container-sm.col-1 {
+        display: none; 
+    }
+
+    .container-sm.sized img {
+        width: 50%; 
+        height: 50%; 
+    }
+
+    
+    .container-sm p {
+        word-wrap: break-word; 
+    }
+
+    .container-sm > .d-flex {
+        width: 100%;
+        justify-content: flex-end;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        white-space: nowrap;
+    }
+
+    .btn-outline-secondary{
+        margin-left: 10%;
+    }
+
+    .input-group{
+        margin-left: 40px;
+    }
+}
