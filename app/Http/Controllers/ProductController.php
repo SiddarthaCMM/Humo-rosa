@@ -71,8 +71,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        // Obtener el producto
         $product = Product::findOrFail($id);
-        return view('products.show', compact('product'));
+    
+        // Pasar el producto a la vista
+        return view('product-modal', compact('product'));
     }
 
     /**
@@ -116,5 +119,19 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Producto eliminado con éxito.');
+    }
+
+    public function showProductModal($id)
+    {
+        // Obtener los detalles del producto por ID
+        $product = Product::findOrFail($id);
+
+        // Pasar los datos al modal (por ejemplo, una vista modal parcial o una respuesta JSON si usas AJAX)
+        return response()->json([
+            'name' => $product->name,
+            'price' => number_format($product->price, 2),
+            'image' => asset('storage/' . $product->image),
+            'description' => $product->description,
+        ]);
     }
 }

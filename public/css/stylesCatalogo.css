@@ -2,6 +2,40 @@ body{
     background-color: #FAEEEE;
 }
 
+/*Modal de cada producto*/
+#modal-product-image{
+    height: 300px;
+}
+
+.modal-title {
+    color: white; /* Aplica el color blanco al nombre del producto */
+}
+
+.modal-dialog {
+    border-radius: 15px; /* Aplica bordes redondeados a todo el modal */
+}
+  
+.modal-content {
+    border-radius: 15px; /* Asegúrate de que el contenido también tenga bordes redondeados */
+}
+
+.modal .btn-collection2 {
+    background-color: #FAEEEE;
+    border: none;
+    color: black;
+    padding: 10px 10px;
+    border-radius: 15px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 700;
+}
+  
+.modal .btn-collection2:hover {
+    background-color: #FAEEEE;
+}
+
+/*Lo demás*/
+
 #catalogoSection{
     padding: 40px;
 }
