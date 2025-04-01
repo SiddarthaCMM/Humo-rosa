@@ -16,7 +16,7 @@ class PaymentController extends Controller
         return view('payment');
     }
 
-    public function totalPayment()
+    public function totalPayment(Request $request)
     {
         $user = auth()->user();
     
@@ -37,22 +37,50 @@ class PaymentController extends Controller
         });
     
         // Cálculo de impuestos
-        $tax = $subtotal * 0.16;  // ejemplo de impuesto del 16%
-        
+        $tax = $subtotal * 0.16;
+    
         // Cálculo del total
         $total = $subtotal + $tax;
     
-        // Agregar log de depuración
-        \Log::info('Subtotal: ' . $subtotal);
-        \Log::info('Tax: ' . $tax);
-        \Log::info('Total: ' . $total);
+        if ($request->ajax()) {
+            // Si la solicitud es AJAX, devolver los valores en formato JSON
+            return response()->json([
+                'subtotal' => $subtotal,
+                'tax' => $tax,
+                'total' => $total
+            ]);
+        }
     
-        // Pasar los productos y los totales a la vista de pago
+        // Si no es una solicitud AJAX, continuar con la lógica estándar
         return view('payment', [
             'cartProducts' => $cartProducts,
             'subtotal' => $subtotal,
             'tax' => $tax,
             'total' => $total
         ]);
+    }
+
+    public function getCartSummary()
+    {
+        $user = auth()->user();
+        
+        if (!$user) {
+            return redirect()->route('home')->with('error', 'Debes iniciar sesión.');
+        }
+    
+        $cartProducts = DB::table('cart_products')
+            ->join('products', 'cart_products.product_id', '=', 'products.id')
+            ->where('cart_products.cart_id', $user->cart->id)
+            ->select('products.*', 'cart_products.quantity', 'cart_products.price', 'cart_products.image')
+            ->get();
+    
+        $subtotal = $cartProducts->sum(function ($product) {
+            return $product->price * $product->quantity;
+        });
+        $tax = $subtotal * 0.16; // Impuesto 16%
+        $total = $subtotal + $tax;
+    
+        // 🔹 Enviar los valores a la vista sin JSON
+        return view('payment', compact('subtotal', 'tax', 'total'));
     }
 }

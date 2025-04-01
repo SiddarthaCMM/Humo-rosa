@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        /*$this->middleware('auth');*/
     }
 
     /**
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $productos = Product::inRandomOrder()->take(6)->get();
+        $categoria = Product::select('category')->distinct()->inRandomOrder()->first();
+        $productoCategoria = Product::where('category', $categoria->category)->inRandomOrder()->first();
+        return view('welcome', compact('productos', 'categoria', 'productoCategoria'));
     }
 }

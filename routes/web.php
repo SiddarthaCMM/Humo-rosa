@@ -5,6 +5,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,12 @@ use App\Http\Controllers\PaymentController;
 */
 
 /*Vista Principal*/
-Route::view('/', 'welcome');
+
+Route::get('/', function () {
+    return redirect()->route('home');
+});
+
+Route::view('/home', 'welcome');
 
 
 /*Creación de objetos para el carrito*/
@@ -45,13 +51,16 @@ Route::middleware(['auth'])->group(function () {
 /*Mostrar el Carrito*/
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/update-cart/{productId}', [CartController::class, 'updateCart']);
+Route::post('/remove-from-cart/{productId}', [CartController::class, 'removeFromCart']);
 
 /*Proceder al pago en el carrito*/
-Route::get('/payment', [PaymentController::class, 'totalPayment'])->name('payment');
+Route::get('/payment', [PaymentController::class, 'getCartSummary'])->name('cart.summary');
+Route::get('/payment', [PaymentController::class, 'getCartSummary'])->name('payment');
 
 /*Rutas Generales*/
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/
