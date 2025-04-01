@@ -172,33 +172,6 @@
 <body>
     <div id="app">
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 gap-5">
-            <li><a href="#" class="nav-link px-2">Inicio</a></li>
-            <li><a href="#" class="nav-link px-2">Productos</a></li>
-            <li><a href="#" class="nav-link px-2">Sobre Nosotros</a></li>
-            <li><a href="#" class="nav-link px-2">Contacto</a></li>
-        </ul>
-
-        <div class="col-md-3 text-end">
-            <!-- Botones -->
-            <button class="btn svg btn-outline-primary me-2">🔍</button>
-            <button class="btn svg btn-outline-primary me-2">🛍️</button>
-
-            <!-- Dropdown -->
-            <div class="dropdown d-inline">
-                <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    👤 Usuario
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Favoritos</a></li>
-                    <li><a class="dropdown-item" href="#">Guardados</a></li>
-                    <li><a class="dropdown-item" href="#">Configuración</a></li>
-                </ul>
-            </div>
-        </div>
-        </nav>
-        @endif
-
         <!-- CONTENIDO -->
         <main class="py-4">
             @yield('content')
