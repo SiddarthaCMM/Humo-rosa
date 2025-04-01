@@ -2,134 +2,130 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/stylesCatalogo.css') }}">
-
 <body>
-
-<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true" data-bs-backdrop="false">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-
-            <h5 class="modal-title" id="miModalLabel" style="color: white;">Carrito (n item/items)</h5>
-
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <!--Card para poner los objetos en el carrito-->
-                <div class="container-sm sized">
-                    <img src="https://placehold.co/120x140" alt="">
-                    <div class="container-sm">
-                        <p>Black Stones Cake</p>
-                        <p>$249.99</p>
-                        <div class="input-group" style="width: 120px;">
-                            <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
-                            <input type="text" id="quantity" class="form-control text-center" value="1" readonly>
-                            <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
+    <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true" data-bs-backdrop="false">
+        <div class="modal-dialog modal-lg"> <!-- Aumenta el tamaño del modal -->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #DDA1A1;">
+                    <h5 class="modal-title" id="miModalLabel" style="color: black">
+                        Carrito ({{ $cartProducts->count() }} item/items)
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    @if ($cartProducts->isEmpty())
+                        <p class="text-center">No hay productos en el carrito.</p>
+                    @else
+                        <div class="container-fluid">
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                @foreach ($cartProducts as $product)
+                                    <div class="col">
+                                        <div class="card h-100 shadow-sm">
+                                            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top img-fluid rounded" style="max-height: 150px; object-fit: cover;" alt="{{ $product->name }}">
+                                            <div class="card-body text-center">
+                                                <h6 class="text-primary">{{ $product->name }}</h6>
+                                                <p class="text-danger fw-bold">${{ number_format($product->price, 2) }}</p>
+                                                <div class="input-group justify-content-center">
+                                                <button class="btn btn-outline-secondary btn-sm btn-decrement" type="button" data-product-id="{{ $product->id }}">-</button>
+                                                <input type="text" id="quantity-{{ $product->id }}" class="form-control text-center" value="{{ $product->quantity }}" style="max-width: 50px;" readonly>
+                                                <button class="btn btn-outline-secondary btn-sm btn-increment" type="button" data-product-id="{{ $product->id }}">+</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                </div> 
- 
-                <hr>
-                <!--Resultado del carrito-->
-                <div class="container-sm sized">
-                    <p class="col-10">Subtotal</p><p class="col-2">$249.99</p>
-                </div> 
-
-                <div class="d-grid gap-2">
-                    <a href="{{ route('payment') }}" class="btn btn-primary" style="background-color: #DCB9B2;">Ver Carrito</a>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-collection2" data-bs-dismiss="modal">Cerrar</button>
+                    <form action="{{ route('payment') }}" method="GET">
+                        <button type="submit" class="btn btn-success">Finalizar compra</button>
+                    </form>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 
     <div id="catalogoSorts" class="container-fluid d-flex flex-wrap">
         <button class="catalogoButton" onclick="marcarActivo(event)">Todo</button>
-        <button class="catalogoButton" onclick="marcarActivo(event)">Velas Anime</button>
-        <button class="catalogoButton" onclick="marcarActivo(event)">Velas Celebridades</button>
-        <button class="catalogoButton" onclick="marcarActivo(event)">Velas Aromáticas</button>
+        <button class="catalogoButton" onclick="marcarActivo(event)">Anime</button>
+        <button class="catalogoButton" onclick="marcarActivo(event)">Celebridades</button>
+        <button class="catalogoButton" onclick="marcarActivo(event)">Aromáticas</button>
         <button class="catalogoButton" onclick="marcarActivo(event)">Cosmética Natural</button>
-        <button class="catalogoButton" onclick="marcarActivo(event)">Personalizados</button>
-        <button class="catalogoButton" onclick="marcarActivo(event)">De temporada</button>
     </div>
 
+    
     <div id="objectsSection" class="container-fluid d-flex flex-wrap">
-        <div class="card">
-            <img src="https://placehold.co/180x130" class="img-fluid" alt="Producto 1">
-            <div class="p-2 text-center">
-                <p style="color: #A57268;">Vasito de Fresa</p>
-                <p style="color: #FF0000;">$249.99</p>
-                <div class="button-buy">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
-                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                        </svg>
-                    </a>
-                </div>
+        @if ($products->isEmpty())
+        <p>No hay productos disponibles.</p>
+        @else
+            <div class="row">
+                @foreach ($products as $product)
+                    <div class="card" data-categoria="{{ $product->category }}">
+                      <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid" alt="{{ $product->name }}">
+                      <div class="p-2 text-center">
+                          <p style="color: #A57268;">{{ $product->name }}</p>
+                          <p style="color: #FF0000;">${{ number_format($product->price, 2) }}</p>
+                      </div>
+                      <div class="button-buy">
+                        <!-- Enlace para abrir el modal, pasamos el id del producto -->
+                        <a href="#" 
+                        data-toggle="modal" 
+                        data-target="#exampleModal"
+                        data-product-id="{{ $product->id }}"
+                        data-product-name="{{ $product->name }}"
+                        data-product-price="{{ number_format($product->price, 2) }}"
+                        data-product-description="{{ $product->description }}"
+                        data-product-image="{{ asset('storage/' . $product->image) }}"
+                        data-product-category="{{ $product->category }}"
+                        data-product-ingredients="{{ $product->ingredients }}"
+                        data-product-aroma="{{ $product->aroma }}"
+                        data-product-stock="{{ $product->stock }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                                <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                            </svg>
+                        </a>
+                      </div>
+                    </div>
+                @endforeach
             </div>
-        </div>
+        @endif
+    </div>
 
-        <div class="card">
-            <img src="https://placehold.co/180x130" class="img-fluid" alt="Producto 2">
-            <div class="p-2 text-center">
-                <p style="color: #A57268;">Vasito de Chocolate</p>
-                <p style="color: #FF0000;">$199.99</p>
-                <div class="button-buy">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
-                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                        </svg>
-                    </a>
-                </div>
+    <!-- Aqui se agrega el objeto al carrito -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+          </div>
+          <div class="modal-body text-left">
+            <p><strong>Categoría:</strong> <span id="modal-product-category"></span></p>
+            <p><strong>Ingredientes:</strong> <span id="modal-product-ingredients"></span></p>
+            <div class="d-flex">
+              <img src="" class="img-fluid mx-auto d-block" alt="" id="modal-product-image">
             </div>
-        </div>
+            <p><strong>Aroma:</strong> <span id="modal-product-aroma"></span></p>
+            <p><strong>Stock:</strong> <span id="modal-product-stock"></span></p>
+            <p><strong>Precio:</strong> $<span id="modal-product-price"></span></p>
+            <p><strong>Descripción:</strong> <span id="modal-product-description"></span></p>
+          </div>
+          <div class="modal-footer perso">
+            <form id="addToCartForm" method="POST">
+                @csrf
+                <input type="hidden" id="product-id" name="productId" value="">
+                <input type="hidden" id="quantity" name="quantity" value="1"> <!-- Puedes ajustarlo si lo deseas -->
 
-        <div class="card">
-            <img src="https://placehold.co/180x130" class="img-fluid" alt="Producto 3">
-            <div class="p-2 text-center">
-                <p style="color: #A57268;">Vasito de Mango</p>
-                <p style="color: #FF0000;">$219.99</p>
-                <div class="button-buy">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
-                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                        </svg>
-                    </a>
+                <div class="modal-footer perso">
+                    <button type="button" class="btn btn-collection2" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-collection2" id="addToCartButton">Agregar al carrito</button>
                 </div>
-            </div>
+            </form>
+          </div>
         </div>
-
-        <div class="card">
-            <img src="https://placehold.co/180x130" class="img-fluid" alt="Producto 3">
-            <div class="p-2 text-center">
-                <p style="color: #A57268;">Vasito de Mango</p>
-                <p style="color: #FF0000;">$219.99</p>
-                <div class="button-buy">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
-                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="card">
-            <img src="https://placehold.co/180x130" class="img-fluid" alt="Producto 3">
-            <div class="p-2 text-center">
-                <p style="color: #A57268;">Vasito de Mango</p>
-                <p style="color: #FF0000;">$219.99</p>
-                <div class="button-buy">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
-                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-
+      </div>
     </div>
 
     <div class="container-fluid" id="gradient-background">
@@ -194,6 +190,119 @@
       </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/catalogojs.js') }}" defer></script>
 </body>
+
+<script>
+$('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Botón que activó el modal
+    
+    // Extraer los datos del atributo data-
+    var name = button.data('product-name');
+    var price = button.data('product-price');
+    var description = button.data('product-description');
+    var image = button.data('product-image');
+    var category = button.data('product-category');
+    var ingredients = button.data('product-ingredients');
+    var aroma = button.data('product-aroma');
+    var Contenido = button.data('product-Contenido');
+    var stock = button.data('product-stock');
+    var productId = button.data('product-id'); // Obtener el ID del producto
+
+    // Actualizar los elementos en el modal
+    var modal = $(this);
+    modal.find('.modal-title').text(name);
+    modal.find('#modal-product-price').text(price);
+    modal.find('#modal-product-description').text(description);
+    modal.find('#modal-product-image').attr('src', image);
+    modal.find('#modal-product-category').text(category);
+    modal.find('#modal-product-ingredients').text(ingredients);
+    modal.find('#modal-product-aroma').text(aroma);
+    modal.find('#modal-product-Contenido').text(Contenido);
+    modal.find('#modal-product-stock').text(stock);
+
+    // Asignar el productId al campo oculto del formulario dentro del modal
+    modal.find('#product-id').val(productId);
+    var button = $(event.relatedTarget);
+    var productId = button.data('product-id');
+    console.log("ID del producto:", productId);
+});
+
+$('#addToCartButton').on('click', function () {
+    var modal = $('#exampleModal');
+    var productId = modal.find('#product-id').val();
+    var quantity = 1;
+
+    $.ajax({
+        url: '/cart/add/' + productId + '/' + quantity,
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Producto agregado!',
+                text: response.message
+            });
+
+            $('#exampleModal').modal('hide'); // Cierra el modal
+        },
+        error: function (xhr) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Hubo un error al agregar el producto al carrito.',
+            });
+        }
+    });
+});
+
+$(document).ready(function() {
+    // Delegación de eventos para los botones de incremento y decremento
+    $('#miModal').on('click', '.btn-increment', function() {
+        var productId = $(this).data('product-id');
+        var quantityInput = $('#quantity-' + productId);
+        var currentQuantity = parseInt(quantityInput.val());
+        
+        quantityInput.val(currentQuantity + 1);
+        updateCartQuantity(productId, currentQuantity + 1);
+    });
+
+    $('#miModal').on('click', '.btn-decrement', function() {
+        var productId = $(this).data('product-id');
+        var quantityInput = $('#quantity-' + productId);
+        var currentQuantity = parseInt(quantityInput.val());
+
+        if (currentQuantity > 1) {
+            quantityInput.val(currentQuantity - 1);
+            updateCartQuantity(productId, currentQuantity - 1);
+        }
+    });
+});
+
+// Función para actualizar la cantidad en el carrito (ajusta esta lógica a la que necesites)
+function updateCartQuantity(productId, quantity) {
+    $.ajax({
+        url: '/update-cart/' + productId,
+        method: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            quantity: quantity
+        },
+        success: function(response) {
+            if (response.success) {
+                console.log('Cantidad actualizada con éxito');
+            }
+        },
+        error: function() {
+            console.log('Error al actualizar la cantidad');
+        }
+    });
+}
+</script>
 @endsection

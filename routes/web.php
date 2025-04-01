@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,31 +17,41 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+/*Vista Principal*/
 Route::view('/', 'welcome');
 
-// Ruta para mostrar el formulario de creación
+
+/*Creación de objetos para el carrito*/
 Route::get('/create', [ProductController::class, 'create'])->name('create');
-
-// Ruta para almacenar el producto
 Route::post('/create', [ProductController::class, 'store'])->name('store');
+Route::get('/catalogue', [App\Http\Controllers\ProductController::class, 'showCatalog'])->name('catalogue');
 
+/*Creación del usuario*/
 Route::get('crear-rol', [RoleController::class, 'create']);
 Route::get('ver-rol', [RoleController::class, 'index']);
 Route::get('actualizar-rol', [RoleController::class, 'update']);
 Route::get('eliminar-rol', [RoleController::class, 'delete']);
 
-Auth::routes();
+/*Agregar Productos al Carrito*/
+Route::post('/cart/add/{productId}/{quantity}', [CartController::class, 'addToCart'])->name('cart.add');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/catalogue', function () {
-    return view('catalogue'); // Carga la vista inicio.blade.php
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add/{productId}/{quantity}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
+    Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
 
-Route::get('/payment', function () {
-    return view('payment');
-})->name('payment');
+/*Mostrar el Carrito*/
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('/update-cart/{productId}', [CartController::class, 'updateCart']);
 
+/*Proceder al pago en el carrito*/
+Route::get('/payment', [PaymentController::class, 'totalPayment'])->name('payment');
+
+/*Rutas Generales*/
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/
