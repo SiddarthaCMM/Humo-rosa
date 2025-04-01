@@ -116,7 +116,7 @@
             <form id="addToCartForm" method="POST">
                 @csrf
                 <input type="hidden" id="product-id" name="productId" value="">
-                <input type="hidden" id="quantity" name="quantity" value="1"> <!-- Puedes ajustarlo si lo deseas -->
+                <input type="hidden" id="quantity" name="quantity" value="1">
 
                 <div class="modal-footer perso">
                     <button type="button" class="btn btn-collection2" data-dismiss="modal">Cerrar</button>

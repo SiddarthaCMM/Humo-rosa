@@ -9,8 +9,52 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
         <title>Humo-rosa</title>
-        <style>
-        </style>
+<style>
+    .container-fluit{
+        background-color: #dbb5b4;
+        
+    }
+
+    .nav-link{
+        font-family: "Onest", serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        color: white;
+    }
+
+    .nav-link:hover{
+        color: #f06f8f
+    }
+
+   
+    .svg{
+        border-radius: 150%;
+        width: 40px;
+        height: 40px;
+        border-color: #A57268;
+        background-color: #F6D8D7;
+    }
+
+    .svg:hover{
+        background-color: #f06f8f;
+        border-color: #f06f8f;
+    }
+
+    .dropdown-toggle{
+        border-radius: 20px;
+        border-color: #A57268;
+        color: #A57268;
+        background-color: #F6D8D7;
+    }
+
+    .dropdown-toggle:hover{
+        background-color: #f06f8f;
+        border-color: #f06f8f;
+    }
+ 
+    
+</style>
     </head>
     <!--
     <body class="antialiased">
@@ -30,15 +74,16 @@
             @endif
     -->
            <!--- =============== MAIN ==================== -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
          <div class="container-fluid main">
             <header class="header">
                <nav class="nav container">
-                  <a href="#" class="nav__logo"><img src="{{asset ('assets/logo_humo_rosa-removebg-preview.png')}}" alt="logo humo rosa" height="100"/></a>
+                  <a href="{{ url('/') }}" class="nav__logo"><img src="{{asset ('assets/logo_humo_rosa-removebg-preview.png')}}" alt="logo humo rosa" height="100"/></a>
       
                   <div class="nav__menu" id=nav-menu>
                      <ul class="nav__list">
                         <li class="nav__item">
-                           <a href="#" class="nav__link">
+                           <a href="{{ url('/') }}" class="nav__link">
                               <i class="ri-arrow-right-up-line"></i>
                               <span>Inicio</span>
                            </a>
@@ -70,15 +115,51 @@
                      <div class="nav__close" id="nav-close">
                         <i class="ri-close-large-line"></i>
                      </div>
-      
+
                      <div class="nav__social">
-                        <a href="{{ route('login') }}" class="nav__social-link">
-                           <button class="button sign">Inicia Sesion</button>
-                        </a>
-      
-                        <a href="{{ route('register') }}" class="nav__social-link">
-                           <button class="button register">Registrate</button>
-                        </a>
+                        @guest
+                            @if (Route::has('login'))
+                            <a href="{{ route('login') }}" class="nav__social-link">
+                                <button class="button sign">Inicia Sesion</button>
+                            </a>
+                            @endif
+
+                            @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="nav__social-link">
+                                <button class="button register">Registrate</button>
+                            </a>
+                            @endif
+                        @else
+                            <div class="col-md-3 text-end">
+                                <button type="button" class="btn svg btn-outline-primary me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#A57268" class="bi bi-search-heart" viewBox="0 0 16 16">
+                                    <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018"/>
+                                    <path d="M13 6.5a6.47 6.47 0 0 1-1.258 3.844q.06.044.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11"/>
+                                </svg></button>
+                                <button type="button" class="btn svg btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#miModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#A57268" class="bi bi-bag-heart" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1M8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="dropdown pe-5">
+                                <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#A57268" class="bi bi-person" viewBox="0 0 16 16">
+                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                                    </svg> {{ Auth::user()->name }}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}" 
+                                        onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">Cerrar Sesión</a></li>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </div>
+                        @endguest
                      </div>
                   </div>
       
@@ -93,7 +174,7 @@
                   Iluminamos emociones</h2>
                <p>Descubre la magia de nuestras velas <br>
                   hechas a mano</p>
-                  <a href="" target="_blank" class="nav__social-link">
+                  <a href="{{ url('/catalogue') }}" class="nav__social-link">
                      <button class="button info">Conoce nuestro catálogo</button>
                   </a>
                
@@ -161,141 +242,79 @@
          </div>
      </div>
        <!-- Carousel -->
-     <div class="container mt-5">
-         <div id="carouselProductos" class="carousel slide" data-bs-ride="carousel">
-             <div class="carousel-inner">
-                 <!-- Item 1 -->
-                 <div class="carousel-item active">
-                     <div class="row justify-content-center">
-                         <div class="col-md-4 d-none d-md-block">
-                             <div class="card">
-                                 <img src="https://placehold.co/530x430" class="img-fluid"  alt="Producto 1">
-                                 <div class="row justify-content-between">
-                                     <p style="color: #A57268;">Vasito de Fresa</p>
-                                     <div class="col-4">
-                                         <p style="color: #FF0000;">$249.99</p>
-                                         <div class="button-buy">
-                                             <button class="btn-collection">
-                                                <i class="fas fa-star"></i>Comprar
-                                             </button>
-                                          </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="card">
-                                 <img src="https://placehold.co/530x430" class="img-fluid" alt="Producto 2">
-                                 <div class="row justify-content-between">
-                                     <p style="color: #A57268;">Guardían del Bosque</p>
-                                     <div class="col-4">
-                                         <p style="color: #FF0000;">$49.99</p>
-                                          <div class="button-buy">
-                                                <button class="btn-collection">
-                                                <i class="fas fa-star"></i> Comprar
-                                                </button>
-                                          </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="col-md-4 d-none d-md-block">
-                             <div class="card">
-                                 <img src="https://placehold.co/530x430" class="img-fluid" alt="Producto 3">
-                                 <div class="row justify-content-between">
-                                     <p style="color: #A57268;">Blank Space</p>
-                                     <div class="col-4">
-                                         <p style="color: #FF0000;">$149.99</p>
-                                          <div class="button-buy">
-                                             <button class="btn-collection">
-                                             <i class="fas fa-star"></i> Comprar
-                                             </button>
-                                          </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <!-- Item 2 -->
-                 <div class="carousel-item">
-                     <div class="row justify-content-center">
-                         <div class="col-md-4 d-none d-md-block">
-                             <div class="card">
-                                 <img src="https://placehold.co/530x430" class="img-fluid" alt="Producto 4">
-                                 <div class="row justify-content-between">
-                                     <p style="color: #A57268;">Vasito de Fresa</p>
-                                     <div class="col-4">
-                                         <p style="color: #FF0000;">$249.99</p>
-                                          <div class="button-buy">
-                                             <button class="btn-collection">
-                                                <i class="fas fa-star"></i> Comprar
-                                             </button>
-                                          </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="card">
-                                 <img src="https://placehold.co/530x430" class="img-fluid" alt="Producto 5">
-                                 <div class="row justify-content-between">
-                                     <p style="color: #A57268;">Guardían del Bosque</p>
-                                     <div class="col-4">
-                                         <p style="color: #FF0000;">$49.99</p>
-                                          <div class="button-buy">
-                                             <button class="btn-collection">
-                                                <i class="fas fa-star"></i> Comprar
-                                             </button>
-                                          </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="col-md-4 d-none d-md-block">
-                             <div class="card">
-                                 <img src="https://placehold.co/530x430" class="img-fluid" alt="Producto 6">
-                                 <div class="row justify-content-between">
-                                     <p style="color: #A57268;">Blank Space</p>
-                                     <div class="col-4">
-                                         <p style="color: #FF0000;">$149.99</p>
-                                          <div class="button-buy">
-                                             <button class="btn-collection">
-                                                <i class="fas fa-star"></i> Comprar
-                                             </button>
-                                          </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-             <!-- Controles -->
-             <button class="carousel-control-prev" type="button" data-bs-target="#carouselProductos" data-bs-slide="prev">
-                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-             </button>
-             <button class="carousel-control-next" type="button" data-bs-target="#carouselProductos" data-bs-slide="next">
-                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-             </button>
-         </div>
-     </div>
+       <div class="container mt-5">
+            <div id="carouselProductos" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                @foreach ($productos->chunk(3) as $grupo)
+                    <div class="carousel-item @if ($loop->first) active @endif">
+                        <div class="row justify-content-center">
+                            @foreach ($grupo as $producto)
+                                <div class="col-md-4 @if($loop->iteration !== 2) d-none d-md-block @endif">
+                                    <div class="card">
+                                        <img src="{{ asset('storage/' . $producto->image) }}" class="img-fluid" alt="{{ $producto->name }}" style="height: 300px; width: 350px; object-fit: cover">
+                                        <div class="row justify-content-between">
+                                            <p style="color: #A57268;">{{ $producto->name }}</p>
+                                            <div class="col-4">
+                                                <p style="color: #FF0000;">${{ number_format($producto->price, 2) }}</p>
+                                                
+                                                <div class="button-buy">
+                                                    @if(auth()->check())
+                                                    <form id="addToCartForm" method="POST" action="{{ route('cart.add', ['productId' => $producto->id, 'quantity' => 1]) }}">
+                                                        @csrf
+
+                                                        <button type="submit" class="btn-collection" id="addToCartButton" data-id="{{ $producto->id }}">
+                                                            Agregar al carrito
+                                                        </button>
+                                                    </form>
+                                                    @else
+                                                        <!-- Si no hay sesión, redirigir al login -->
+                                                        <a href="{{ route('login') }}" class="btn-collection">
+                                                            <i class="fas fa-star"></i> Comprar
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+                <!-- Controles -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselProductos" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselProductos" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
        <!-- Custom Card -->
-     <div class="container my-5">
-         <div class="row align-items-center custom-card">
-             <div class="col-md-8">
-                 <h2 class="fw-bold text-secondary">Glow Girl Essentials</h2>
-                 <button class="btn btn-collection my-3">Ver Colección</button>
-                 <p class="text-secondary">
-                     ¡Descubre el ritual de belleza que tu piel merece!<br>
-                     Nuevos y adorables diseños de jabones que aportan una nutrición exquisita a tu rutina.
-                 </p>
-             </div>
-             <div class="col-md-4">
-                 <img src="https://placehold.co/400x300" alt="Productos Glow Girl" class="img-fluid rounded">
-             </div>
-         </div>
-     </div>
+       <div class="container my-5">
+            <div class="row align-items-center custom-card">
+                <div class="col-md-8">
+                    <h2 class="fw-bold text-secondary">{{ $categoria->category }}</h2>
+                    <button class="btn btn-collection my-3">Ver Colección</button>
+                    <p class="text-secondary">
+                        @php
+                            $mensajes = [
+                                'Anime' => 'Sumérgete en el mundo de tus series y personajes favoritos con nuestra colección inspirada en el anime. ¡Lleva la esencia de la cultura japonesa a tu rutina diaria!',
+                                'Celebridades' => 'Siente el glamour y la sofisticación de tus íconos favoritos con nuestra colección de velas inspiradas en celebridades. ¡Un toque de lujo para tu recamara!',
+                                'Aromáticas' => 'Despierta tus sentidos con nuestra colección de velas aromáticas. Fragancias envolventes y relajantes para ese ambiente perfecto.',
+                                'Cosmética Natural' => '¡Descubre el ritual de belleza que tu piel merece! Nuevos y adorables diseños de jabones que aportan una nutrición exquisita a tu rutina.'
+                            ];
+                        @endphp
+
+                        {{ $mensajes[$categoria->category] ?? 'Descubre nuestra colección exclusiva diseñada para el bienestar y la belleza de tu piel.' }}
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="{{ asset('storage/' . $productoCategoria->image) }}" alt="Producto de {{ $categoria->category }}" class="img-fluid rounded" style="height: 300px; width: 300px; object-fit: cover">
+                </div>
+            </div>
+        </div>
  
      <br>
        <!-- Comments clients -->
@@ -356,6 +375,8 @@
              </div>
          </div>
      </div>
+
+     <!-- Footer -->
         
      <div class="container-fluid" id="gradient-background">
       <footer class="py-5">
@@ -363,28 +384,24 @@
           <div class="col-6 col-md-2 mb-3">
             <h5>Menu</h5>
             <ul class="flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nuevos productos</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Más vendidos</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Vistos recientemente</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Populares de esta semana</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Todos los productos</a></li>
+              <li class="nav-item mb-2"><a href="{{ url('/catalogue') }}" class="nav-link p-0 text-body-secondary">Todos los productos</a></li>
             </ul>
           </div>
     
           <div class="col-6 col-md-2 mb-3">
             <h5>Categorias</h5>
             <ul class="flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Velas</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Anime</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cosmética natural</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Paquetes</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Celebridades</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Aromáticas</a></li>
           </div>
     
           <div class="col-6 col-md-2 mb-3">
             <h5>Nuestra compañia</h5>
             <ul class="flex-column">
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Sobre nosotras</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contactanós</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Privacidad</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contactanos</a></li>
             </ul>
           </div>
     
@@ -404,22 +421,61 @@
         <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
           <p>© 2025 Humo-rosa, Inc. Todos los Derechos reservados.</p>
           <ul class="list-unstyled d-flex">
-               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bii bi-facebook" viewBox="0 0 16 16">
-               <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
-               </svg>
-               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bii bi-instagram" viewBox="0 0 16 16">
-               <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-               </svg>
-               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bii bi-pinterest" viewBox="0 0 16 16">
-               <path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0"/>
+            <a href="https://www.facebook.com/profile.php?id=61554481344201" target="_blank" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
                 </svg>
+            </a>
+            
+            <a href="https://www.instagram.com/humo.rosa.mx/?igsh=MWwwZDl6N2Q5NG5iYw%3D%3D" target="_blank" class="btn btn-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+                </svg>
+            </a>
           </ul>
         </div>
       </footer>
     </div>
           <!-- Boostrap -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
          <!--=============== MAIN JS ===============-->
          <script src="{{ asset('js/main.js') }}"></script>
     </body>
+
+<script>
+$(document).on('click', '#addToCartButton', function (event) {
+    event.preventDefault();  // Prevenir la acción por defecto
+
+    var productId = $(this).data('id');  // Obtener el ID del producto desde el botón
+    console.log("Product ID: ", productId); // Verifica que el ID es correcto
+    var quantity = 1;  // La cantidad del producto, en este caso es 1
+
+    $.ajax({
+        url: '/cart/add/' + productId + '/' + quantity,
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content')  // Incluir el token CSRF
+        },
+        success: function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Producto agregado!',
+                text: response.message
+            });
+        },
+        error: function(xhr) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error al agregar el producto al carrito.',
+            });
+        }
+    });
+});
+</script>
 </html>

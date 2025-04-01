@@ -8,7 +8,7 @@ class CreateCartProductTable extends Migration
 {
     public function up()
     {
-        Schema::create('cart_product', function (Blueprint $table) {
+        Schema::create('cart_products', function (Blueprint $table) {
             $table->id(); // ID del producto en el carrito
             $table->foreignId('cart_id')->constrained()->onDelete('cascade'); // Relaciona con el carrito
             $table->foreignId('product_id')->constrained()->onDelete('cascade'); // Relaciona con el producto

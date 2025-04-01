@@ -13,27 +13,32 @@ class CartController extends Controller
     // Agregar producto al carrito
     public function addToCart($productId, $quantity)
     {
+        \Log::info('ID recibido en Laravel:', ['productId' => $productId, 'quantity' => $quantity]);
         $user = auth()->user(); // Obtener el usuario autenticado
-    
-        if (!$user) {
-            return response()->json(['message' => 'Debes iniciar sesión para agregar productos al carrito'], 401);
-        }
-    
+        
         $product = Product::find($productId); // Obtener el producto
         
         if (!$product) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
         }
     
-        $cart = $user->cart()->firstOrCreate([]); // Crear o encontrar el carrito del usuario
-        
+        // Obtener el carrito del usuario
+        $cart = $user->cart()->first(); 
+    
+        if (!$cart) {
+            return response()->json(['message' => 'Carrito no encontrado'], 404);
+        }
+    
+        // Verificar si el producto ya está en el carrito
         $cartProduct = $cart->products()->where('product_id', $productId)->first();
     
         if ($cartProduct) {
+            // Si el producto ya está en el carrito, actualizamos la cantidad
             $cart->products()->updateExistingPivot($productId, [
                 'quantity' => $cartProduct->pivot->quantity + $quantity
             ]);
         } else {
+            // Si el producto no está en el carrito, lo agregamos
             $cart->products()->attach($productId, [
                 'quantity' => $quantity,
                 'price' => $product->price,

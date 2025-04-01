@@ -24,7 +24,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
-    <!--
+    
     <style>
     .container-fluit{
         background-color: #dbb5b4;
@@ -71,7 +71,7 @@
  
     
     </style>
-    -->
+    
 </head>
 <body>
   <div id="app" class="container-fluit">
@@ -83,13 +83,13 @@
             </div>
       
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 gap-5">
-              <li><a href="#" class="nav-link px-2">Inicio</a></li>
-              <li><a href="#" class="nav-link px-2">Productos</a></li>
+              <li><a href="{{ url('/') }}" class="nav-link px-2">Inicio</a></li>
+              <li><a href="{{ url('/catalogue') }}" class="nav-link px-2">Productos</a></li>
               <li><a href="#" class="nav-link px-2">Sobre Nosotros</a></li>
               <li><a href="#" class="nav-link px-2">Contacto</a></li>
             </ul>
       
-              <div class="col-md-3 text-end">
+            <div class="col-md-3 text-end">
                 <button type="button" class="btn svg btn-outline-primary me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#A57268" class="bi bi-search-heart" viewBox="0 0 16 16">
                     <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018"/>
                     <path d="M13 6.5a6.47 6.47 0 0 1-1.258 3.844q.06.044.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11"/>
@@ -99,7 +99,7 @@
                         <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1M8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                     </svg>
                 </button>
-              </div>
+            </div>
 
             <div class="dropdown pe-5">
               <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
