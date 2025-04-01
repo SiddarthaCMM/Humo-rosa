@@ -388,14 +388,26 @@
             </ul>
           </div>
     
-          <div class="col-6 col-md-2 mb-3">
+            <div class="col-6 col-md-2 mb-3">
             <h5>Categorias</h5>
-            <ul class="flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Anime</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cosmética natural</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Celebridades</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Aromáticas</a></li>
-          </div>
+                <ul class="flex-column">
+                    <li class="nav-item mb-2">
+                        <a href="{{ url('/catalogue?categoria=Anime') }}" class="nav-link p-0 text-body-secondary">Anime</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="{{ url('/catalogue?categoria=Cosmética%20Natural') }}" class="nav-link p-0 text-body-secondary">Cosmética Natural</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="{{ url('/catalogue?categoria=Celebridades') }}" class="nav-link p-0 text-body-secondary">Celebridades</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="{{ url('/catalogue?categoria=Aromáticas') }}" class="nav-link p-0 text-body-secondary">Aromáticas</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="{{ url('/catalogue?categoria=Todo') }}" class="nav-link p-0 text-body-secondary">Todo</a>
+                    </li>
+                </ul>
+            </div>
     
           <div class="col-6 col-md-2 mb-3">
             <h5>Nuestra compañia</h5>

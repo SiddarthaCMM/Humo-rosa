@@ -51,9 +51,11 @@ Route::middleware(['auth'])->group(function () {
 /*Mostrar el Carrito*/
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/update-cart/{productId}', [CartController::class, 'updateCart']);
+Route::post('/remove-from-cart/{productId}', [CartController::class, 'removeFromCart']);
 
 /*Proceder al pago en el carrito*/
-Route::get('/payment', [PaymentController::class, 'totalPayment'])->name('payment');
+Route::get('/payment', [PaymentController::class, 'getCartSummary'])->name('cart.summary');
+Route::get('/payment', [PaymentController::class, 'getCartSummary'])->name('payment');
 
 /*Rutas Generales*/
 Auth::routes();

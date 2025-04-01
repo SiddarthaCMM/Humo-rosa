@@ -72,6 +72,29 @@ class CartController extends Controller
     public function updateCart(Request $request, $productId)
     {
         $user = auth()->user();
+        
+        if (!$user) {
+            return response()->json(['message' => 'Debes iniciar sesión'], 401);
+        }
+    
+        $cart = $user->cart()->first();
+        $cartProduct = $cart->products()->where('product_id', $productId)->first();
+    
+        if (!$cartProduct) {
+            return response()->json(['message' => 'Producto no encontrado en el carrito'], 404);
+        }
+    
+        // Actualizar la cantidad del producto
+        $cart->products()->updateExistingPivot($productId, [
+            'quantity' => $request->quantity
+        ]);
+    
+        return response()->json(['success' => true, 'message' => 'Cantidad actualizada']);
+    }
+
+    public function removeFromCart(Request $request, $productId)
+    {
+        $user = auth()->user();
     
         if (!$user) {
             return response()->json(['message' => 'Debes iniciar sesión'], 401);
@@ -84,33 +107,9 @@ class CartController extends Controller
             return response()->json(['message' => 'Producto no encontrado en el carrito'], 404);
         }
     
-        $cart->products()->updateExistingPivot($productId, [
-            'quantity' => $request->quantity
-        ]);
-    
-        return response()->json(['success' => true, 'message' => 'Cantidad actualizada']);
-    }
-
-    // Eliminar producto del carrito
-    public function removeFromCart($productId)
-    {
-        $user = auth()->user(); // Obtener el usuario autenticado
-        
-        // Verifica si el usuario está autenticado
-        if (!$user) {
-            return response()->json(['message' => 'Debes iniciar sesión'], 401);
-        }
-
-        $cart = $user->cart()->first(); // Obtener el carrito del usuario
-
-        // Verifica si el carrito existe y si el producto está en el carrito
-        if (!$cart || !$cart->products()->where('product_id', $productId)->exists()) {
-            return response()->json(['message' => 'Producto no encontrado en el carrito'], 404);
-        }
-
-        // Elimina el producto del carrito
+        // Eliminar el producto del carrito
         $cart->products()->detach($productId);
-
-        return response()->json(['message' => 'Producto eliminado del carrito']);
+    
+        return response()->json(['success' => true, 'message' => 'Producto eliminado del carrito']);
     }
 }
