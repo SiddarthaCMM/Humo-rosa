@@ -1,108 +1,107 @@
+@php
+    app()->instance('login_page', true);
+    $flip = request()->get('view') === 'register' ? 'flipped' : '';
+@endphp
+
 @extends('layouts.app')
 
-@section('content')  
-<link rel="stylesheet" href="{{ asset('css/stylesLogInRegister.css') }}">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/stylesLogInRegister.css') }}">
+@endpush
 
-<body class="login-page">
-        <div class="login-container">
-            <h1>¡Bienvenido!</h1>
-            <h2>Iniciar Sesion</h2>
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-                    <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                
+@section('content')
+    <a href="{{ url('/') }}" class="logo-login">
+        <img src="{{ asset('assets/logo_humo_rosa-removebg-preview.png') }}" alt="Humo Rosa Logo">
+    </a>
+
+    <div class="flip-container {{ $flip }}" id="flipContainer">
+        <div class="flipper">
+
+            {{-- FRONT: Iniciar Sesión --}}
+            <div class="front form-card">
+                <h1>¡Bienvenido!</h1>
+                <h2>Iniciar Sesión</h2>
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <label for="name">Usuario</label>
+                    <input id="name" type="text" name="name" required placeholder="Ingresa tu usuario"
+                        autocomplete="username">
+
                     <label for="password">Contraseña</label>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input id="password" type="password" name="password" required placeholder="Ingresa tu contraseña"
+                        autocomplete="current-password">
 
-                    <div class="form-check">
-                        <label class="labelRecuerdame">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>Recuerdame
-                        </label>
+                    <div class="remember-container">
+                        <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <label for="remember">Recuérdame</label>
                     </div>
 
-                    <button id="submitButton" type="submit">{{ __('Login') }}</button>
-                
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
-            </form>
-            <p>O continua con</p>
-            <div class="social-login">
-                <button class="google">G</button>
-                <button class="facebook">f</button>
-                <button class="apple"></button>
+                    <div class="options">
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+                        @endif
+                    </div>
+
+                    <button class="submitButton" type="submit">Iniciar Sesión</button>
+                </form>
+
+                <div class="user">
+                    ¿No tienes cuenta? <span id="showRegister">Regístrate</span>
+                </div>
+
+                <p class="text-muted">O continúa con</p>
+                <div class="social-login">
+                    <button>G</button>
+                    <button>f</button>
+                    <button></button>
+                </div>
             </div>
 
-            <div>
-                <div class="user"><span class="newUser">¿Olvidaste tu contraseña?</span></div>
+            {{-- BACK: Registro --}}
+            <div class="back form-card">
+                <h1>¡Bienvenido!</h1>
+                <h2>Regístrate</h2>
+
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+
+                    <label for="name">Usuario</label>
+                    <input id="name" type="text" name="name" required placeholder="Ingresa tu nombre"
+                        autocomplete="username">
+
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" required placeholder="Ingresa tu email"
+                        autocomplete="email">
+
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" name="password" required placeholder="Crea una contraseña"
+                        autocomplete="new-password">
+
+                    <label for="password-confirm">Confirmar Contraseña</label>
+                    <input id="password-confirm" type="password" name="password_confirmation" required
+                        placeholder="Confirma tu contraseña" autocomplete="new-password">
+
+                    <button class="submitButton" type="submit">Registrarse</button>
+                </form>
+
+                <div class="user">
+                    ¿Ya tienes cuenta? <span id="showLogin">Inicia Sesión</span>
+                </div>
             </div>
-        </div> 
-        
-        <div class ="register-container">
-            <h1>¡Bienvenido!</h1>
-            <h2>Registrate</h2>
-            <form method="POST" action="{{ route('register') }}">
-            @csrf
-                <label for="email">Email</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
 
-                <label for="usuario">Usuario</label>
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-
-                <label for="contrasena">Contraseña</label>
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-
-                <label for="contrasena">Contraseña</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                <button type="submit">
-                                    {{ __('Register') }}
-                </button>
-            </form>
-            <div class="user">¿Ya tienes cuenta? <span class="existingUser">Inicia Sesion</span></div>
         </div>
+    </div>
 
+    @push('scripts')
         <script>
-            function togglePassword() {
-                var passwordInput = document.getElementById("contrasena");
-                var toggleBtn = document.getElementById("togglePassword");
-                if (passwordInput.type === "password") {
-                    passwordInput.type = "text";
-                    toggleBtn.textContent = "🙈";
-                } else {
-                    passwordInput.type = "password";
-                    toggleBtn.textContent = "👁";
-                }
-            }
-        </script>    
+            const flipContainer = document.getElementById('flipContainer');
+            const showRegister = document.getElementById('showRegister');
+            const showLogin = document.getElementById('showLogin');
 
-        <script src="{{ asset('js/loginAnimation.js') }}" defer></script>
+            showRegister?.addEventListener('click', () => flipContainer.classList.add('flipped'));
+            showLogin?.addEventListener('click', () => flipContainer.classList.remove('flipped'));
+        </script>
+    @endpush
 @endsection

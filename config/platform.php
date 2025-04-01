@@ -48,6 +48,7 @@ return [
     */
 
     'middleware' => [
+
         'public'  => ['web'],
         'private' => ['web', 'platform'],
     ],
@@ -95,7 +96,7 @@ return [
     |
     */
 
-    'index' => 'platform.main',
+    'index' => 'platform.index',
 
     /*
     |--------------------------------------------------------------------------

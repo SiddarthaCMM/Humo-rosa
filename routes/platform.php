@@ -20,7 +20,9 @@ use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\CandleScreen;
 use App\Orchid\Screens\CandleEditScreen;
 
-// Pantallas personalizadas para Velas
+
+
+Route::screen('registered-users', UserListScreen::class)->name('platform.registered.users');
 Route::screen('candles', CandleScreen::class)->name('platform.candles');
 Route::screen('candles/create', CandleEditScreen::class)->name('platform.candles.create');
 Route::screen('candles/{candle}/edit', CandleEditScreen::class)->name('platform.candles.edit');
@@ -34,9 +36,11 @@ Route::screen('candles/{candle}/edit', CandleEditScreen::class)->name('platform.
 |
 */
 
-// Main
-Route::screen('/main', PlatformScreen::class)
-    ->name('platform.main');
+
+Route::screen('main', PlatformScreen::class)->name('platform.index');
+
+
+
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

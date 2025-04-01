@@ -1,199 +1,201 @@
+/*-----------------------------------------------------
+| IMPORTACIÓN DE FUENTE
+------------------------------------------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700&display=swap");
+
+/*-----------------------------------------------------
+| ESTILOS GENERALES
+------------------------------------------------------*/
+* {
+    font-family: "Onest", sans-serif !important;
+}
+
 body {
-    background-image: url('/imgs/IMG_6231.jpeg');
-    backdrop-filter: blur(5px);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/*-----------------------------------------------------
+| ESTILOS SOLO PARA LA PÁGINA DE LOGIN
+------------------------------------------------------*/
+body.login-page {
+    background-image: url("/imgs/IMG_6231.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    backdrop-filter: blur(5px);
+    min-height: 100vh;
     margin: 0;
+}
+
+/* Ocultar navbar e íconos en login */
+body.login-page .navbar,
+body.login-page .dropdown,
+body.login-page .svg {
+    display: none !important;
+}
+
+/* Logo flotante en login */
+.logo-login {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+.logo-login img {
+    height: 110px;
+    transition: transform 0.2s ease;
+}
+
+.logo-login:hover img {
+    transform: scale(1.05);
+}
+
+/*-----------------------------------------------------
+| CONTENEDOR Y EFECTO FLIP
+------------------------------------------------------*/
+.flip-container {
+    perspective: 1000px;
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-page main {
-    margin-top: 0px;
-}
-
-.login-container{
-    background-color: #efe0db;
-    width: 325px;
-    height: 620px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-.register-container{
-    background-color: #efe0db;
-    width: 325px;
-    height: 620px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-h1 {
-    text-align: left;
-    color: #000;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
-}
-h2 {
-    text-align: left;
-    color: #000;
-    font-family: 'Poppins', sans-serif; 
-    font-weight: 500;
-    font-size: 31px;
-}
-p{
-    color: #333;
-    font-family: 'Poppins', sans-serif;
-    align-items: flex-start;
-    cursor: pointer;
-}
-p span{
-    color: blue;
-}
-a {
-    font-family: 'Poppins', sans-serif;
-    color: #c0b2af;
-    font-size: 14px;
-}
-form {  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.labelRecuerdame{
-    font-family: 'Poppins', sans-serif;
-    color: #000;
-    text-align: left;
-}
-label {
-    
-    align-self: flex-start;
-    margin-top: 10px;
-    margin-right: auto;
-    font-family: 'Poppins', sans-serif;
-}
-
-input[type="text"],
-input[type="password"] {
-    width: 80%;
-    align-items: center;
-    padding: 10px 20px;
-    margin-top: 5px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.toggle-password {
-    position: absolute;
-    margin-left: -30px;
-    margin-top: 15px;
-    cursor: pointer;
-}
-.password-container {
+.flipper {
     position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 630px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-in-out;
+}
+
+.flip-container.flipped .flipper {
+    transform: rotateY(180deg);
+}
+
+/*-----------------------------------------------------
+| CARAS DEL FLIP
+------------------------------------------------------*/
+.front,
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 25px 30px;
+    backface-visibility: hidden;
+    background-color: #fbe9e9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00000010;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+/*-----------------------------------------------------
+| TEXTOS Y ENCABEZADOS
+------------------------------------------------------*/
+.form-card h1 {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.form-card h2 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/*-----------------------------------------------------
+| FORMULARIOS Y CAMPOS
+------------------------------------------------------*/
+input {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0 appearance checkbox;
+    accent-color: #d48787;
+}
+
+.remember-container {
     display: flex;
     align-items: center;
-}
-.password-container input {
-    width: 100%;
-    padding-right: 40px;
-}
-.toggle-btn {
-    position: absolute;
-    right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #333;
 }
 
 .options {
-    align-items: center;
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    margin: 10px;
-    font-size: 14px;
-    cursor: pointer;
+    font-size: 13px;
+    margin-bottom: 15px;
 }
 
-.submitButton{
-    align-items: center;
-    background-color: #ff6b6b;
-    color: #fff;
-    padding: 10px 108px;
+.submitButton {
+    width: 100%;
+    padding: 12px;
+    background-color: #d48787;
     border: none;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
     border-radius: 5px;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 10px;
-    font-family: 'Poppins', sans-serif;
 }
 
 .submitButton:hover {
-    background-color: #ff4b4b;
+    background-color: #c06b6b;
+}
+
+/*-----------------------------------------------------
+| EXTRAS
+------------------------------------------------------*/
+.user {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.user span {
+    color: #e58e9c;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.text-muted {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 15px;
 }
 
 .social-login {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .social-login button {
-    background-color: #fff;
-    border: 1px solid #ccc;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin: 0 10px;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 0 5px #ccc;
     cursor: pointer;
-}
-
-.social-login button.google {
-    color: #db4437;
-}
-
-.social-login button.facebook {
-    color: #3b5998;
-}
-
-.social-login button.apple {
-    color: #000;
-}
-
-.login-container{
-    position: absolute;
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease-in-out;
-    z-index: 2;
-    
-   
-}
-.register-container{
-    position: absolute;
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease-in-out;
-    z-index: 1;
-    transform: rotateY(180deg);
-}
-
-    
-
-.user{
-    color:#c0b2af;
-    margin-top: 20px;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    pointer-events: auto;
-    
 }
