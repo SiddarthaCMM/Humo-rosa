@@ -44,7 +44,7 @@ body.login-page .svg {
 }
 
 .logo-login img {
-    height: 110px;
+    height: 60px;
     transition: transform 0.2s ease;
 }
 
@@ -121,22 +121,13 @@ input {
     border-radius: 5px;
 }
 
-input[type="checkbox"] {
-    width: auto;
-    height: auto;
-    margin: 0;
-    padding: 0 appearance checkbox;
-    accent-color: #d48787;
-}
-
 .remember-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 10px;
     font-size: 14px;
-    color: #333;
+    color: #555;
 }
 
 .options {
