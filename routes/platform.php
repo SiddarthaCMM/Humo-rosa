@@ -17,15 +17,15 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-use App\Orchid\Screens\CandleScreen;
-use App\Orchid\Screens\CandleEditScreen;
+use App\Orchid\Screens\ProductScreen;
+use App\Orchid\Screens\ProductEditScreen;
 
 
 
 Route::screen('registered-users', UserListScreen::class)->name('platform.registered.users');
-Route::screen('candles', CandleScreen::class)->name('platform.candles');
-Route::screen('candles/create', CandleEditScreen::class)->name('platform.candles.create');
-Route::screen('candles/{candle}/edit', CandleEditScreen::class)->name('platform.candles.edit');
+Route::screen('products', \App\Orchid\Screens\ProductScreen::class)->name('platform.products');
+Route::screen('products/create', ProductEditScreen::class)->name('platform.products.create');
+Route::screen('products/{product}/edit', ProductEditScreen::class)->name('platform.products.edit');
 
 /*
 |--------------------------------------------------------------------------

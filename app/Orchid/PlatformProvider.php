@@ -9,7 +9,7 @@ use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
-use App\Orchid\Screens\CandleScreen;
+use App\Orchid\Screens\ProductScreen;
 use Orchid\Platform\Screens\UserEditScreen;
 use App\Orchid\Screens\UserListScreen;
 
@@ -29,10 +29,10 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            Menu::make('Velas')
+            Menu::make('Productos')
                 ->icon('fire')
                 ->title('Contenido')
-                ->route('platform.candles'),
+                ->route('platform.products'),
 
             
             
@@ -74,7 +74,7 @@ class PlatformProvider extends OrchidServiceProvider
         parent::registerRoutes(); // Carga las rutas por defecto de Orchid
 
         // Ruta personalizada para tu pantalla de velas
-        Route::screen('candles', CandleScreen::class)->name('platform.candles');
+        Route::screen('products', ProductScreen::class)->name('platform.products');
         Route::screen('users', UserListScreen::class)->name('platform.registered.users');
     }
 }

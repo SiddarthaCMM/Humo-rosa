@@ -99,14 +99,14 @@
                     </li>
 
                     <li class="nav__item">
-                        <a href="#" class="nav__link">
+                        <a href="{{ route('aboutus') }}" class="nav__link">
                             <i class="ri-arrow-right-up-line"></i>
                             <span>Sobre nosotras</span>
                         </a>
                     </li>
 
                     <li class="nav__item">
-                        <a href="#" class="nav__link">
+                        <a href="{{ route('contacto') }}" class="nav__link">
                             <i class="ri-arrow-right-up-line"></i>
                             <span>Contacto</span>
                         </a>
@@ -452,9 +452,9 @@
             <div class="col-6 col-md-2 mb-3">
                 <h5>Nuestra compañia</h5>
                 <ul class="flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Sobre
+                    <li class="nav-item mb-2"><a href="{{ route('aboutus') }}" class="nav-link p-0 text-body-secondary">Sobre
                             nosotras</a></li>
-                    <li class="nav-item mb-2"><a href="#"
+                    <li class="nav-item mb-2"><a href="{{ route('contacto') }}"
                             class="nav-link p-0 text-body-secondary">Contactanos</a></li>
                 </ul>
             </div>

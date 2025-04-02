@@ -104,8 +104,8 @@
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 gap-5">
                 <li><a href="{{ url('/') }}" class="nav-link px-2">Inicio</a></li>
                 <li><a href="{{ url('/catalogue') }}" class="nav-link px-2">Productos</a></li>
-                <li><a href="#" class="nav-link px-2">Sobre Nosotros</a></li>
-                <li><a href="#" class="nav-link px-2">Contacto</a></li>
+                <li><a href="{{ route('aboutus') }}" class="nav-link px-2">Sobre Nosotros</a></li>
+                <li><a href="{{ route('contacto') }}" class="nav-link px-2">Contacto</a></li>
             </ul>
             @guest
                 @if (Route::has('login'))

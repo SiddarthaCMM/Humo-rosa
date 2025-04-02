@@ -61,6 +61,12 @@ Route::get('/payment', [PaymentController::class, 'getCartSummary'])->name('paym
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+/*About Us*/
+Route::view('/about-us', 'aboutus')->name('aboutus');
+
+/*Contacto*/
+Route::view('/contacto', 'contacto')->name('contacto');
+
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/
