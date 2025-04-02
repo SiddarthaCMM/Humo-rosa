@@ -25,12 +25,12 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <label for="name">Usuario</label>
-                    <input id="name" type="text" name="name" required placeholder="Ingresa tu usuario"
+                    <label for="login_name">Usuario</label>
+                    <input id="login_name" type="text" name="name" required placeholder="Ingresa tu usuario"
                         autocomplete="username">
 
-                    <label for="password">Contraseña</label>
-                    <input id="password" type="password" name="password" required placeholder="Ingresa tu contraseña"
+                    <label for="login_password">Contraseña</label>
+                    <input id="login_password" type="password" name="password" required placeholder="Ingresa tu contraseña"
                         autocomplete="current-password">
 
                     <div class="remember-container">
@@ -67,20 +67,20 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <label for="name">Usuario</label>
-                    <input id="name" type="text" name="name" required placeholder="Ingresa tu nombre"
+                    <label for="register_name">Usuario</label>
+                    <input id="register_name" type="text" name="name" required placeholder="Ingresa tu nombre"
                         autocomplete="username">
 
-                    <label for="email">Email</label>
-                    <input id="email" type="email" name="email" required placeholder="Ingresa tu email"
+                    <label for="register_email">Email</label>
+                    <input id="register_email" type="email" name="email" required placeholder="Ingresa tu email"
                         autocomplete="email">
 
-                    <label for="password">Contraseña</label>
-                    <input id="password" type="password" name="password" required placeholder="Crea una contraseña"
+                    <label for="register_password">Contraseña</label>
+                    <input id="register_password" type="password" name="password" required placeholder="Crea una contraseña"
                         autocomplete="new-password">
 
-                    <label for="password-confirm">Confirmar Contraseña</label>
-                    <input id="password-confirm" type="password" name="password_confirmation" required
+                    <label for="register_password_confirmation">Confirmar Contraseña</label>
+                    <input id="register_password_confirmation" type="password" name="password_confirmation" required
                         placeholder="Confirma tu contraseña" autocomplete="new-password">
 
                     <button class="submitButton" type="submit">Registrarse</button>
