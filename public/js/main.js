@@ -16,3 +16,12 @@ if(navClose){
       navMenu.classList.remove('show-menu')
    })
 }
+
+window.addEventListener("load", () => {
+   setTimeout(() => {
+     const letters = document.querySelectorAll(".smoke");
+     letters.forEach(letter => {
+       letter.classList.add("animate");
+     });
+   }, 1000); // Espera 1 segundo después de cargar
+ });

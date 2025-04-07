@@ -23,8 +23,16 @@
     @stack('styles')
 
     <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
         .container-fluit {
-            background-color: #dbb5b4;
+            background-color:rgb(236, 193, 191);
+        }
+
+        .logo{
+            filter: contrast(300%);
         }
 
         .nav-link {
@@ -32,11 +40,12 @@
             font-optical-sizing: auto;
             font-weight: 500;
             font-style: normal;
+            font-size: 1.3rem;
             color: white;
         }
 
         .nav-link:hover {
-            color: #f06f8f
+            color:rgb(134, 98, 98);
         }
 
         .svg {
@@ -60,8 +69,8 @@
         }
 
         .dropdown-toggle:hover {
-            background-color: #f06f8f;
-            border-color: #f06f8f;
+            background-color: #DDA1A1;
+            border-color: #DDA1A1;
         }
 
         .button {
@@ -76,14 +85,44 @@
             color: white;
         }
 
+        .botones{
+            display: flex;
+        }
+
         .sign {
-            background-color: #F3C6C6;
+            background-color:rgb(248, 147, 143);
             border: none;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sign:hover{
+            transform: scale(1.1);
         }
 
         .register {
             background-color: #CD7E7E;
             border: none;
+            margin-left: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .register:hover{
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 375px) and (max-width: 770px){
+            .sign, .register{
+                width: 100%;
+                justify-content: center;
+            }
+
+            .menuUp{
+                width: 100%;
+            }
+
+            .nav-link{
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -96,13 +135,13 @@
         </main>
     @else
         {{-- Layout general con navbar --}}
-        <div id="app" class="container-fluit">
+        <div id="app" class="container-fluit menuUp">
             <nav
                 class="navbar d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
                 <div class="col-md-3 mb-2 mb-md-0">
                     <a href="{{ url('/') }}" class="d-inline-flex link-body-emphasis text-decoration-none ps-5">
-                        <img src="{{ asset('assets/logo_humo_rosa-removebg-preview.png') }}" alt="logo humo-rosa"
-                            height="80px">
+                        <img class="logo" src="{{ asset('assets/logo_humo_rosa-removebg-preview.png') }}" alt="logo humo-rosa"
+                            height="90px">
                     </a>
                 </div>
 
@@ -115,6 +154,7 @@
 
                 @guest
                     @if (Route::has('login'))
+                    <div class="botones">
                         <a href="{{ route('login') }}" class="nav__social-link">
                             <button class="button sign">Inicia Sesión</button>
                         </a>
@@ -124,6 +164,7 @@
                         <a href="{{ route('login', ['view' => 'register']) }}" class="nav__social-link">
                             <button class="button register">Regístrate</button>
                         </a>
+                    </div>
                     @endif
                 @else
                     <div class="col-md-3 text-end">

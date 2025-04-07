@@ -213,6 +213,7 @@ h2 {
     margin-left: 10%;
     margin-right: 10%;
     height: 12vh;
+    border-radius: 10px;
 }
 
 .marca {
@@ -276,12 +277,6 @@ h2 {
         flex-direction: column;
         justify-content: space-between;
         transition: left 0.4s;
-    }
-
-    .container-iconos {
-        transform: translateX(-150px);
-        visibility: hidden;
-        transition: transform 0.4s ease-out, visibility 0.4s;
     }
 
     .nav__item {
@@ -410,12 +405,14 @@ h2 {
 /* Show menu */
 .show-menu {
     left: 0;
+    display: block;
 }
 
 /* Animation link when displaying menu */
 .show-menu .nav__item {
     visibility: visible;
     transform: translateX(0);
+    display: block;
 }
 
 /*=============== BREAKPOINTS ===============*/
@@ -453,3 +450,114 @@ h2 {
         column-gap: 3.5rem;
     }
 }
+
+@keyframes appearSmoke {
+    from {
+      transform: rotate(45deg) translateY(-200px);
+      opacity: 0;
+      filter: blur(20px);
+    }
+    to {
+      transform: rotate(0deg) translateY(0);
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
+  
+  .smoke {
+    color: #fff;
+    opacity: 0; /* Oculto inicialmente */
+    animation: appearSmoke 3s forwards;
+  }
+  
+  /* Animación con delay escalonado */
+  .smoke:nth-child(1) { animation-delay: 0s; }
+  .smoke:nth-child(2) { animation-delay: 0.4s; }
+  .smoke:nth-child(3) { animation-delay: 0.8s; }
+  .smoke:nth-child(4) { animation-delay: 1.2s; }
+  .smoke:nth-child(5) { animation-delay: 1.6s; }
+
+@media (min-width: 375px) and (max-width: 770px){
+    .show-menu{
+        display: block;
+    }
+
+    .nav__menu {
+      position: fixed;
+      z-index: 9999;
+      text-align: center;
+    }
+  
+    .nav__list {
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .nav__item {
+      margin-bottom: 10px;
+    }
+  
+    .nav__social {
+      margin-top: 20px;
+      justify-content: center;
+    }
+  
+    .nav__social-link {
+      margin: 5px;
+    }
+  
+    .nav__toggle {
+      display: block; /* Mostrar el menú toggle */
+      cursor: pointer;
+    }
+  
+    .main-text {
+      padding: 30px 0;
+    }
+  
+    .smoke {
+      font-size: 2rem; /* Reducir tamaño de las letras */
+    }
+  
+    h2 {
+      font-size: 2rem;
+    }
+  
+    p {
+      font-size: 1rem;
+    }
+  
+    .container-iconos {
+      flex-direction: column;
+      text-align: center;
+      height: 50vh;
+    }
+  
+    .marca {
+      margin-bottom: 20px;
+    }
+  
+    .icono texto {
+      font-size: 1rem;
+    }
+  
+    .icono svg {
+      width: 30px;
+      height: 30px;
+    }
+  
+    /* Ajustar el tamaño de los botones */
+    .button {
+      width: auto;
+      padding: 12px 0;
+      font-size: 0.8rem;
+      align-items: center;
+    }
+  
+    .button-buy{
+      margin: 40%;
+    }
+   
+  
+    }

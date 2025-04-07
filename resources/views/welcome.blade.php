@@ -181,12 +181,12 @@
             </div>
         </nav>
     </header>
-    <div class="main-text">
-        <h2>Encendemos momentos <br>
+    <div class="main-text" id="smokeList">
+        <h2 class="smoke">Encendemos momentos <br>
             Iluminamos emociones</h2>
-        <p>Descubre la magia de nuestras velas <br>
+        <p class="smoke">Descubre la magia de nuestras velas <br>
             hechas a mano</p>
-        <a href="{{ url('/catalogue') }}" class="nav__social-link">
+        <a class="smoke" href="{{ url('/catalogue') }}" class="nav__social-link">
             <button class="button info">Conoce nuestro catálogo</button>
         </a>
 
@@ -264,7 +264,7 @@
     </div>
 </div>
 <!-- Carousel -->
-<div class="container mt-5">
+<div class="container mt-5 col-auto">
     <div id="carouselProductos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             @foreach ($productos->chunk(3) as $grupo)
@@ -320,7 +320,7 @@
     </div>
 </div>
 <!-- Custom Card -->
-<div class="container my-5">
+<div class="container my-5 col-auto">
     <div class="row align-items-center custom-card">
         <div class="col-md-8">
             <h2 class="fw-bold text-secondary">{{ $categoria->category }}</h2>
@@ -368,7 +368,7 @@
     </div>
 </div>
 
-<div class="container my-5">
+<div class="container my-5 col-auto">
     <div class="row g-4 justify-content-center">
         <div class="col-md-4">
             <div class="custom-card text-center">
