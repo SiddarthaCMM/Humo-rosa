@@ -413,7 +413,7 @@
                 Gracias por ser parte de nuestra historia. Te invitamos a explorar nuestros productos y descubrir 
                 la diferencia que la pasión y la calidad pueden hacer.
             </p>
-            <button>Contáctanos</button>
+            <a href="{{ route('contacto') }}"><button>Contáctanos</button></a>
         </div>
         
     </div>
