@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Orchid\Platform\Models\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -66,6 +68,28 @@ class User extends Authenticatable
 
     public function cart()
     {
-        return $this->hasOne(Cart::class); // Relación uno a uno entre Usuario y Carrito
+        return $this->hasOne(\App\Models\Cart::class);
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'role_users');
+    }
+
+    
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            // Crear carrito automáticamente
+            \App\Models\Cart::create([
+                'user_id' => $user->id,
+            ]);
+    
+            // Asignar rol de cliente (ID = 1)
+            DB::table('role_users')->insert([
+                'user_id' => $user->id,
+                'role_id' => 1,
+            ]);
+        });
     }
 }

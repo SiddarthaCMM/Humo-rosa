@@ -69,5 +69,12 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        Cart::create([
+            'user_id' => $user->id,
+        ]);
+
+        $clienteRoleId = 2; // Por ejemplo: 1 = admin, 2 = cliente
+        $user->roles()->attach($clienteRoleId);
     }
 }

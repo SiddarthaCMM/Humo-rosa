@@ -67,6 +67,9 @@ Route::view('/about-us', 'aboutus')->name('aboutus');
 /*Contacto*/
 Route::view('/contacto', 'contacto')->name('contacto');
 
+/*Configuración del perfil*/
+Route::view('/configuration', 'configuration')->name('configuration');
+
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/

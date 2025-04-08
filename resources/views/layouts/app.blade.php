@@ -74,11 +74,14 @@
             font-style: normal;
             text-decoration: none;
             color: white;
+            outline: none; /* Elimina el contorno azul */
+            border: none;
         }
 
         .sign {
             background-color: #F3C6C6;
             border: none;
+            
         }
 
         .register {
