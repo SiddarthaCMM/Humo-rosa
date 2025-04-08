@@ -380,7 +380,7 @@
             border-radius: 5px;
             font-size: 16px;
         }
-        .button {
+        .btnEnv {
             background-color: #d97b6c;
             color: white;
             border: none;
@@ -390,7 +390,7 @@
             cursor: pointer;
             transition: 0.3s;
         }
-        .button:hover {
+        .btnEnv:hover {
             background-color: #c5695c;
         }
         .contact-info {
@@ -461,7 +461,7 @@
                 </div>
             </div>
             <div class="button-container">
-                <button type="submit" class="button">Enviar</button>
+                <button type="submit" class="button btnEnv">Enviar</button>
             </div>
         </div>
     </div>

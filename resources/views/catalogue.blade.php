@@ -65,7 +65,7 @@
         @if ($products->isEmpty())
         <p>No hay productos disponibles.</p>
         @else
-            <div class="row gap-5">
+            <div class="row gap-5 cardz">
                 @foreach ($products as $product)
                     <div class="card" data-categoria="{{ $product->category }}">
                       <img class="cardsImg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">

@@ -334,6 +334,56 @@
         padding: 0;
         margin: 20px auto 0 auto;
         }
+
+        .extra{
+            margin-left: 175px;
+            font-weight: bold;
+        }
+
+        .extra2{
+            margin-left: 200px;
+            font-size: 14px;
+            color:  #7a615a;
+        }
+
+        @media (min-width: 375px) and (max-width: 770px){
+            .info-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+        }
+
+            .info-img {
+                margin: 15px auto;
+            }
+
+            .info-text {
+                width: 100%;
+                max-width: 100%;
+                margin: 10px 0;
+            }
+
+            .team-name,
+            .team-role {
+                text-align: center;
+                margin: 5px 0;
+            }
+
+            .extra,.extra2{
+                text-align: center;
+                margin: 5px 0;
+            }
+
+            .about-text {
+                text-align: center;
+            }
+
+            .info-title {
+                justify-content: center;
+            }
+        }
+
+    
     </style>
 
 <body>
@@ -379,11 +429,11 @@
                 </p>
             </div>
         </div>
-        <p style="margin-left: 175px; font-weight: bold;">Madali Salas</p>
-        <p style="margin-left: 200px; font-size: 14px; color: #7a615a;">Socia</p>
+        <p class="extra">Madali Salas</p>
+        <p class="extra2">Socia</p>
 
         <div class="info-section" style="display: flex; justify-content: space-between;">
-            <div class="info-text" style="width: 48%;">
+            <div class="info-text">
                 <div class="info-title">
                     <img src="{{ asset('assets/Heart.png') }}" alt="coazon" class="info-icon">
                     <h2 class="info-title">Compromiso con la comunidad</h2>
@@ -395,7 +445,7 @@
                     personal y profesional.
                 </p>
             </div>
-            <div class="info-text" style="width: 48%; text-align: right;">
+            <div class="info-text" style="text-align: right;">
                 <div class="info-title">
                     <img src="{{ asset('assets/Lightning 01.png') }}" alt="rayito" class="info-icon">
                     <h2 class="info-title">Negocio online</h2>
