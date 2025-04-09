@@ -109,7 +109,7 @@
         }
 
           /* Botones */
-        .button {
+          .button {
             width: 9vw;
             height: 4vh;
             border-radius: 30px;
@@ -146,6 +146,91 @@
 
         .register:hover{
             transform: scale(1.1);
+        }
+
+        .container-fluit {
+            background-color:rgb(236, 193, 191);
+        }
+          /* Navegacion  */
+        .logo{
+            filter: contrast(300%);
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+      
+        .nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            position: relative;
+            padding-bottom: 5px; /* Espacio para la línea */
+        }
+
+        .nav a.active::after {
+            content: "";
+            display: block;
+            width: 50%;
+            height: 2px;
+            background-color: #5a4035;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav a::after {
+            content: "";
+            display: block;
+            width: 0%;
+            height: 2px;
+            background-color: #A57268; 
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover{
+            color: #5a4035;
+        }
+
+        .svg {
+            border-radius: 150%;
+            width: 40px;
+            height: 40px;
+            border-color: #A57268;
+            background-color: #F6D8D7;
+        }
+
+          /*icono */
+
+        .svg:hover {
+            background-color: #f06f8f;
+            border-color: #f06f8f;
+        }
+
+        .dropdown-toggle {
+            border-radius: 20px;
+            border-color: #A57268;
+            color: #A57268;
+            background-color: #F6D8D7;
+        }
+
+        .dropdown-toggle:hover {
+            background-color: #DDA1A1;
+            border-color: #DDA1A1;
+        }
+
+        .search{
+          margin-left: 90px;
         }
 
           /* Responsivo */
@@ -247,7 +332,7 @@
                 @endguest
             </nav>
         </div>
-
+        
         <main class="py-4">
             @yield('content')
         </main>

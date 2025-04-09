@@ -70,6 +70,11 @@ Route::view('/contacto', 'contacto')->name('contacto');
 /*Configuración del perfil*/
 Route::view('/configuration', 'configuration')->name('configuration');
 
+    /*Secundarios de configuración de Perfil*/
+    Route::view('/configuration/configurar_direcciones', 'menu_compras.index_agregar_direccion')->name('direcciones');
+    Route::view('/configuration/compras', 'menu_compras.index_compras')->name('compras');
+    Route::view('/configuration/billetera', 'menu_compras.index_con_billetera')->name('billetera');
+
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/

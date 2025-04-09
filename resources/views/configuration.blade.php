@@ -136,11 +136,133 @@
     
      }
 
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .container-fluit {
+            background-color:rgb(236, 193, 191);
+        }
+          /* Navegacion  */
+        .logo{
+            filter: contrast(300%);
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+      
+        .nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            position: relative;
+            padding-bottom: 5px; /* Espacio para la línea */
+        }
+
+        .nav a.active::after {
+            content: "";
+            display: block;
+            width: 50%;
+            height: 2px;
+            background-color: #5a4035;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav a::after {
+            content: "";
+            display: block;
+            width: 0%;
+            height: 2px;
+            background-color: #A57268; 
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover{
+            color: #5a4035;
+        }
+
+        .svg {
+            border-radius: 150%;
+            width: 40px;
+            height: 40px;
+            border-color: #A57268;
+            background-color: #F6D8D7;
+        }
+
+          /*icono */
+
+        .svg:hover {
+            background-color: #f06f8f;
+            border-color: #f06f8f;
+        }
+
+        .dropdown-toggle {
+            border-radius: 20px;
+            border-color: #A57268;
+            color: #A57268;
+            background-color: #F6D8D7;
+        }
+
+        .dropdown-toggle:hover {
+            background-color: #DDA1A1;
+            border-color: #DDA1A1;
+        }
+
      .search{
       margin-left: 90px;
      }
    
-  
+     .button {
+            width: 9vw;
+            height: 4vh;
+            border-radius: 30px;
+            font-family: "Onest", serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            text-decoration: none;
+            color: white;
+            outline: none; /* Elimina el contorno azul */
+            border: none;
+        }
+
+        .botones{
+            display: flex;
+        }
+
+        .sign {
+            background-color:rgb(248, 147, 143);
+            border: none;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sign:hover{
+            transform: scale(1.1);
+        }
+
+        .register {
+            background-color: #CD7E7E;
+            border: none;
+            margin-left: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .register:hover{
+            transform: scale(1.1);
+        }
     </style>
 
 <body>
@@ -150,8 +272,8 @@
     <div class="row">
               <div class="col-1 left">
                       <div id="simple-list-example" class="d-flex flex-column gap-5 simple-list-example-scrollspy text-center">
-                          <a class="p-1 rounded" href="./index_main.html">Mi perfil </a>
-                          <a class="p-1 rounded" href="./menu compras/index_compras.html">Compras </a>
+                          <a class="p-1 rounded" href="{{ route('configuration') }}">Mi perfil </a>
+                          <a class="p-1 rounded" href="{{ route('compras') }}">Compras </a>
                           <a class="p-1 rounded" href="#simple-list-item-3">Salir</a>
                       </div>
 
@@ -172,8 +294,8 @@
                                   <div class="col-1">
                                           <div id="simple-list-example" class="d-flex flex-column gap-5 simple-list-example-scrollspy text-center">
                                             <img src="../assets/logo_humo_rosa-removebg-preview.png" alt="logo humo rosa" height="80"/>
-                                              <a class="p-1 rounded" href="./index_main.html">Mi perfil </a>
-                                              <a class="p-1 rounded" href="./menu compras/index_compras.html">Compras </a>
+                                              <a class="p-1 rounded" href="{{ route('configuration') }}">Mi perfil </a>
+                                              <a class="p-1 rounded" href="{{ route('compras') }}">Compras </a>
                                               <a class="p-1 rounded" href="#simple-list-item-3">Salir</a>
                                             </div>
                                   </div>
@@ -188,13 +310,13 @@
                   <nav class="navbar d-flex justify-content-center mt-4">
                       <ul class="nav nav-underline">
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="./index_main.html">Mi perfil</a>
+                          <a class="nav-link" aria-current="page" href="{{ route('configuration') }}">Mi perfil</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="./menu compras/index_agregar_direccion.html">Mis direcciones</a>
+                          <a class="nav-link" aria-current="page" href="{{ route('direcciones') }}">Mis direcciones</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="./menu compras/index_sin_pago.html">Billetera</a>
+                          <a class="nav-link" aria-current="page" href="{{ route('billetera') }}">Billetera</a>
                         </li>
                       </ul>
                         <div class="search">

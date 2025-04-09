@@ -73,6 +73,53 @@
                 </div>
             @endif
     -->
+
+<!--Modal del carrito-->
+<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true" data-bs-backdrop="false">
+        <div class="modal-dialog modal-lg"> <!-- Aumenta el tamaño del modal -->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #DDA1A1;">
+                    <h5 class="modal-title" id="miModalLabel" style="color: black">
+                        Carrito ({{ $cartProducts->count() }} item/items)
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    @if ($cartProducts->isEmpty())
+                        <p class="text-center">No hay productos en el carrito.</p>
+                    @else
+                        <div class="container-fluid">
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                @foreach ($cartProducts as $product)
+                                    <div class="col">
+                                        <div class="card h-100 shadow-sm">
+                                            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top img-fluid rounded" style="max-height: 150px; object-fit: cover;" alt="{{ $product->name }}">
+                                            <div class="card-body text-center">
+                                                <h6 class="text-primary">{{ $product->name }}</h6>
+                                                <p class="text-danger fw-bold">${{ number_format($product->price, 2) }}</p>
+                                                <div class="input-group justify-content-center">
+                                                <button class="btn btn-outline-secondary btn-sm btn-decrement" type="button" data-product-id="{{ $product->id }}">-</button>
+                                                <input type="text" id="quantity-{{ $product->id }}" class="form-control text-center" value="{{ $product->quantity }}" style="max-width: 50px;" readonly>
+                                                <button class="btn btn-outline-secondary btn-sm btn-increment" type="button" data-product-id="{{ $product->id }}">+</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-collection2" data-bs-dismiss="modal">Cerrar</button>
+                    <form action="{{ route('payment') }}" method="GET">
+                        <button type="submit" class="btn btn-success">Finalizar compra</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!--- =============== MAIN ==================== -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="container-fluid main">
@@ -160,7 +207,7 @@
                                 </svg> {{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                <li><a class="dropdown-item" href="{{ route('configuration') }}">Configuración</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">Cerrar
@@ -540,6 +587,49 @@
             }
         });
     });
+
+    $(document).ready(function() {
+        // Delegación de eventos para los botones de incremento y decremento
+        $('#miModal').on('click', '.btn-increment', function() {
+            var productId = $(this).data('product-id');
+            var quantityInput = $('#quantity-' + productId);
+            var currentQuantity = parseInt(quantityInput.val());
+            
+            quantityInput.val(currentQuantity + 1);
+            updateCartQuantity(productId, currentQuantity + 1);
+        });
+
+        $('#miModal').on('click', '.btn-decrement', function() {
+            var productId = $(this).data('product-id');
+            var quantityInput = $('#quantity-' + productId);
+            var currentQuantity = parseInt(quantityInput.val());
+
+            if (currentQuantity > 1) {
+                quantityInput.val(currentQuantity - 1);
+                updateCartQuantity(productId, currentQuantity - 1);
+            }
+        });
+    });
+
+    // Función para actualizar la cantidad en el carrito
+    function updateCartQuantity(productId, quantity) {
+        $.ajax({
+            url: '/update-cart/' + productId,
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                quantity: quantity
+            },
+            success: function(response) {
+                if (response.success) {
+                    console.log('Cantidad actualizada con éxito');
+                }
+            },
+            error: function() {
+                console.log('Error al actualizar la cantidad');
+            }
+        });
+    }
 </script>
 
 </html>

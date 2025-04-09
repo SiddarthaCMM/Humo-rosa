@@ -299,7 +299,7 @@ $(document).ready(function() {
     });
 });
 
-// Función para actualizar la cantidad en el carrito (ajusta esta lógica a la que necesites)
+// Función para actualizar la cantidad en el carrito
 function updateCartQuantity(productId, quantity) {
     $.ajax({
         url: '/update-cart/' + productId,
