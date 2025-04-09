@@ -8,7 +8,7 @@
 
     <style>
      body{
-        background-color: #FAEEEE;
+        background-color:#CEE6F3;
         font-family: "Onest", serif;
         font-optical-sizing: auto;
         font-weight: 500;
@@ -263,6 +263,14 @@
         .register:hover{
             transform: scale(1.1);
         }
+
+        .test{
+          background-color:#A1CAE2;
+          border-radius: 30px;
+          height: auto;
+          filter: blur(50%);
+        }
+
     </style>
 
 <body>
@@ -270,7 +278,7 @@
   <div class="container-fluid">
 
     <div class="row">
-              <div class="col-1 left">
+              <div class="col-1 left test">
                       <div id="simple-list-example" class="d-flex flex-column gap-5 simple-list-example-scrollspy text-center">
                           <a class="p-1 rounded" href="{{ route('configuration') }}">Mi perfil </a>
                           <a class="p-1 rounded" href="{{ route('compras') }}">Compras </a>
@@ -310,21 +318,15 @@
                   <nav class="navbar d-flex justify-content-center mt-4">
                       <ul class="nav nav-underline">
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="{{ route('configuration') }}">Mi perfil</a>
+                          <a style="color: black" class="nav-link" aria-current="page" href="{{ route('configuration') }}">Mi perfil</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="{{ route('direcciones') }}">Mis direcciones</a>
+                          <a style="color: black" class="nav-link" aria-current="page" href="{{ route('direcciones') }}">Mis direcciones</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="{{ route('billetera') }}">Billetera</a>
+                          <a style="color: black" class="nav-link" aria-current="page" href="{{ route('billetera') }}">Billetera</a>
                         </li>
                       </ul>
-                        <div class="search">
-                          <form class="d-flex" role="search">
-                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-success save" type="submit">Search</button>
-                          </form>
-                        </div>
                   </nav>
 
                    <!-- imagen de perfil -->

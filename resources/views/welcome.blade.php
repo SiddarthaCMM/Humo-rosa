@@ -26,7 +26,7 @@
         }
 
         .nav-link:hover {
-            color: #f06f8f
+            color:rgb(235, 59, 103)
         }
 
 
@@ -53,6 +53,10 @@
         .dropdown-toggle:hover {
             background-color: #f06f8f;
             border-color: #f06f8f;
+        }
+
+        .foot{
+            color: white;
         }
     </style>
 </head>
@@ -179,7 +183,7 @@
                             </a>
                         @endif
                     @else
-                        <div class="col-md-3 text-end">
+                        <div class="col-md-3 text-end d-flex">
                             <button type="button" class="btn svg btn-outline-primary me-2"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#A57268"
                                     class="bi bi-search-heart" viewBox="0 0 16 16">
@@ -463,46 +467,52 @@
     <footer class="py-5">
         <div class="row">
             <div class="col-6 col-md-2 mb-3">
-                <h5>Menu</h5>
                 <ul class="flex-column">
+                    <li> 
+                    <h5>Menu</h5>
+                    </li>
                     <li class="nav-item mb-2"><a href="{{ url('/catalogue') }}"
-                            class="nav-link p-0 text-body-secondary">Todos los productos</a></li>
+                            class="nav-link p-0 foot">Todos los productos</a></li>
                 </ul>
             </div>
 
             <div class="col-6 col-md-2 mb-3">
-                <h5>Categorias</h5>
                 <ul class="flex-column">
-                    <li class="nav-item mb-2">
+                    <li>
+                    <h5>Categorias</h5>
+                    </li>
+                    <li class="nav-item mr-3">
                         <a href="{{ url('/catalogue?categoria=Anime') }}"
-                            class="nav-link p-0 text-body-secondary">Anime</a>
+                            class="nav-link p-0 foot">Anime</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="{{ url('/catalogue?categoria=Cosmética%20Natural') }}"
-                            class="nav-link p-0 text-body-secondary">Cosmética Natural</a>
+                            class="nav-link p-0 foot">Cosmética Natural</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="{{ url('/catalogue?categoria=Celebridades') }}"
-                            class="nav-link p-0 text-body-secondary">Celebridades</a>
+                            class="nav-link p-0 foot">Celebridades</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="{{ url('/catalogue?categoria=Aromáticas') }}"
-                            class="nav-link p-0 text-body-secondary">Aromáticas</a>
+                            class="nav-link p-0 foot">Aromáticas</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="{{ url('/catalogue?categoria=Todo') }}"
-                            class="nav-link p-0 text-body-secondary">Todo</a>
+                            class="nav-link p-0 foot">Todo</a>
                     </li>
                 </ul>
             </div>
 
             <div class="col-6 col-md-2 mb-3">
-                <h5>Nuestra compañia</h5>
                 <ul class="flex-column">
-                    <li class="nav-item mb-2"><a href="{{ route('aboutus') }}" class="nav-link p-0 text-body-secondary">Sobre
+                    <li>
+                    <h5>Nuestra compañia</h5>
+                    </li>
+                    <li class="nav-item mb-2"><a href="{{ route('aboutus') }}" class="nav-link p-0 foot">Sobre
                             nosotras</a></li>
                     <li class="nav-item mb-2"><a href="{{ route('contacto') }}"
-                            class="nav-link p-0 text-body-secondary">Contactanos</a></li>
+                            class="nav-link p-0 foot">Contactanos</a></li>
                 </ul>
             </div>
 
