@@ -23,20 +23,62 @@
     @stack('styles')
 
     <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
         .container-fluit {
-            background-color: #dbb5b4;
+            background-color:rgb(236, 193, 191);
         }
-
-        .nav-link {
-            font-family: "Onest", serif;
-            font-optical-sizing: auto;
-            font-weight: 500;
-            font-style: normal;
+          /* Navegacion  */
+        .logo{
+            filter: contrast(300%);
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+      
+        .nav a {
+            text-decoration: none;
             color: white;
+            font-weight: bold;
+            font-size: 16px;
+            position: relative;
+            padding-bottom: 5px; /* Espacio para la línea */
         }
 
-        .nav-link:hover {
-            color: #f06f8f
+        .nav a.active::after {
+            content: "";
+            display: block;
+            width: 50%;
+            height: 2px;
+            background-color: #5a4035;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav a::after {
+            content: "";
+            display: block;
+            width: 0%;
+            height: 2px;
+            background-color: #A57268; 
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover{
+            color: #5a4035;
         }
 
         .svg {
@@ -46,6 +88,8 @@
             border-color: #A57268;
             background-color: #F6D8D7;
         }
+
+          /*icono */
 
         .svg:hover {
             background-color: #f06f8f;
@@ -60,10 +104,11 @@
         }
 
         .dropdown-toggle:hover {
-            background-color: #f06f8f;
-            border-color: #f06f8f;
+            background-color: #DDA1A1;
+            border-color: #DDA1A1;
         }
 
+          /* Botones */
         .button {
             width: 9vw;
             height: 4vh;
@@ -78,15 +123,46 @@
             border: none;
         }
 
+        .botones{
+            display: flex;
+        }
+
         .sign {
-            background-color: #F3C6C6;
+            background-color:rgb(248, 147, 143);
             border: none;
-            
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sign:hover{
+            transform: scale(1.1);
         }
 
         .register {
             background-color: #CD7E7E;
             border: none;
+            margin-left: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .register:hover{
+            transform: scale(1.1);
+        }
+
+          /* Responsivo */
+
+        @media (min-width: 375px) and (max-width: 770px){
+            .sign, .register{
+                width: 100%;
+                justify-content: center;
+            }
+
+            .menuUp{
+                width: 100%;
+            }
+
+            .nav-link{
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -99,13 +175,13 @@
         </main>
     @else
         {{-- Layout general con navbar --}}
-        <div id="app" class="container-fluit">
+        <div id="app" class="container-fluit menuUp">
             <nav
                 class="navbar d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
                 <div class="col-md-3 mb-2 mb-md-0">
                     <a href="{{ url('/') }}" class="d-inline-flex link-body-emphasis text-decoration-none ps-5">
-                        <img src="{{ asset('assets/logo_humo_rosa-removebg-preview.png') }}" alt="logo humo-rosa"
-                            height="80px">
+                        <img class="logo" src="{{ asset('assets/logo_humo_rosa-removebg-preview.png') }}" alt="logo humo-rosa"
+                            height="90px">
                     </a>
                 </div>
 
@@ -118,6 +194,7 @@
 
                 @guest
                     @if (Route::has('login'))
+                    <div class="botones">
                         <a href="{{ route('login') }}" class="nav__social-link">
                             <button class="button sign">Inicia Sesión</button>
                         </a>
@@ -127,6 +204,7 @@
                         <a href="{{ route('login', ['view' => 'register']) }}" class="nav__social-link">
                             <button class="button register">Regístrate</button>
                         </a>
+                    </div>
                     @endif
                 @else
                     <div class="col-md-3 text-end">
