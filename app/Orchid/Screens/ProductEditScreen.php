@@ -11,6 +11,7 @@ use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Support\Facades\Alert;
+use Illuminate\Http\Request;
 
 class ProductEditScreen extends Screen
 {
@@ -19,7 +20,7 @@ class ProductEditScreen extends Screen
     public function query(Product $product): array
     {
         return [
-            'product' => $product
+            'product' => $product,
         ];
     }
 
@@ -86,14 +87,28 @@ class ProductEditScreen extends Screen
                     ->type('number')
                     ->required(),
 
-                Picture::make('product.image')
-                    ->title('Imagen'),
+                Input::make('product.image')
+                    ->title('Imagen')
+                    ->type('file')
+                    ->accept('image/*')
             ])
         ];
     }
 
     public function save(Product $product, Request $request)
     {
+        // Verificar si se ha subido una imagen
+        if ($request->hasFile('product.image')) {
+            // Obtener el archivo de la imagen
+            $image = $request->file('product.image');
+
+            // Guardar la imagen en el directorio 'public/products' y obtener el nombre del archivo
+            $imagePath = $image->store('images', 'public');
+
+            // Guardar la ruta de la imagen en la base de datos
+            $product->image = $imagePath;
+        }
+
         $product->fill($request->get('product'))->save();
 
         Alert::info('El producto fue guardado correctamente.');

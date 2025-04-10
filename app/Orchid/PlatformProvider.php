@@ -62,7 +62,9 @@ class PlatformProvider extends OrchidServiceProvider
         return [
             ItemPermission::group('Sistema')
                 ->addPermission('platform.systems.roles', 'Roles')
-                ->addPermission('platform.systems.users', 'Usuarios'),
+                ->addPermission('platform.systems.users', 'Usuarios')
+                ->addPermission('platform.products', 'Productos') // Añadir permiso para productos
+                ->addPermission('platform.systems.files', 'Archivos'),
         ];
     }
 

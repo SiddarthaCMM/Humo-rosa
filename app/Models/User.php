@@ -71,11 +71,6 @@ class User extends Authenticatable
         return $this->hasOne(\App\Models\Cart::class);
     }
 
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class, 'role_users');
-    }
-
     
     protected static function booted()
     {

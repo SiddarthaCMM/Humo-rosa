@@ -25,6 +25,6 @@ class Product extends Model
      */
     public function getContent(): string
     {
-        return $this->Contenido; // Devuelve el valor del campo 'Contenido'
+        return $this->Contenido ?? ''; // Devuelve el valor del campo 'Contenido'
     }
 }

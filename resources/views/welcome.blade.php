@@ -26,7 +26,7 @@
         }
 
         .nav-link:hover {
-            color:rgb(235, 59, 103)
+            color: rgb(235, 59, 103)
         }
 
 
@@ -55,7 +55,7 @@
             border-color: #f06f8f;
         }
 
-        .foot{
+        .foot {
             color: white;
         }
     </style>
@@ -79,50 +79,57 @@
     -->
 
 <!--Modal del carrito-->
-<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true" data-bs-backdrop="false">
-        <div class="modal-dialog modal-lg"> <!-- Aumenta el tamaño del modal -->
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #DDA1A1;">
-                    <h5 class="modal-title" id="miModalLabel" style="color: black">
-                        Carrito ({{ $cartProducts->count() }} item/items)
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    @if ($cartProducts->isEmpty())
-                        <p class="text-center">No hay productos en el carrito.</p>
-                    @else
-                        <div class="container-fluid">
-                            <div class="row row-cols-1 row-cols-md-2 g-3">
-                                @foreach ($cartProducts as $product)
-                                    <div class="col">
-                                        <div class="card h-100 shadow-sm">
-                                            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top img-fluid rounded" style="max-height: 150px; object-fit: cover;" alt="{{ $product->name }}">
-                                            <div class="card-body text-center">
-                                                <h6 class="text-primary">{{ $product->name }}</h6>
-                                                <p class="text-danger fw-bold">${{ number_format($product->price, 2) }}</p>
-                                                <div class="input-group justify-content-center">
-                                                <button class="btn btn-outline-secondary btn-sm btn-decrement" type="button" data-product-id="{{ $product->id }}">-</button>
-                                                <input type="text" id="quantity-{{ $product->id }}" class="form-control text-center" value="{{ $product->quantity }}" style="max-width: 50px;" readonly>
-                                                <button class="btn btn-outline-secondary btn-sm btn-increment" type="button" data-product-id="{{ $product->id }}">+</button>
-                                                </div>
+<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true"
+    data-bs-backdrop="false">
+    <div class="modal-dialog modal-lg"> <!-- Aumenta el tamaño del modal -->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #DDA1A1;">
+                <h5 class="modal-title" id="miModalLabel" style="color: black">
+                    Carrito ({{ $cartProducts->count() }} item/items)
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                @if ($cartProducts->isEmpty())
+                    <p class="text-center">No hay productos en el carrito.</p>
+                @else
+                    <div class="container-fluid">
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            @foreach ($cartProducts as $product)
+                                <div class="col">
+                                    <div class="card h-100 shadow-sm">
+                                        <img src="{{ asset('storage/' . $product->image) }}"
+                                            class="card-img-top img-fluid rounded" style="max-height: 150px; object-fit: cover;"
+                                            alt="{{ $product->name }}">
+                                        <div class="card-body text-center">
+                                            <h6 class="text-primary">{{ $product->name }}</h6>
+                                            <p class="text-danger fw-bold">${{ number_format($product->price, 2) }}</p>
+                                            <div class="input-group justify-content-center">
+                                                <button class="btn btn-outline-secondary btn-sm btn-decrement" type="button"
+                                                    data-product-id="{{ $product->id }}">-</button>
+                                                <input type="text" id="quantity-{{ $product->id }}"
+                                                    class="form-control text-center" value="{{ $product->quantity }}"
+                                                    style="max-width: 50px;" readonly>
+                                                <button class="btn btn-outline-secondary btn-sm btn-increment" type="button"
+                                                    data-product-id="{{ $product->id }}">+</button>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endif
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-collection2" data-bs-dismiss="modal">Cerrar</button>
-                    <form action="{{ route('payment') }}" method="GET">
-                        <button type="submit" class="btn btn-success">Finalizar compra</button>
-                    </form>
-                </div>
+                    </div>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-collection2" data-bs-dismiss="modal">Cerrar</button>
+                <form action="{{ route('payment') }}" method="GET">
+                    <button type="submit" class="btn btn-success">Finalizar compra</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 <!--- =============== MAIN ==================== -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -212,9 +219,14 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('configuration') }}">Configuración</a></li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">Cerrar
+
+                                @if(Auth::user()->roles->contains('id', 2))
+                                    <li><a class="dropdown-item" href="{{ route('platform.index') }}">Panel de Administración</a>
+                                    </li>
+                                @endif
+
+                                <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">Cerrar
                                         Sesión</a></li>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -246,8 +258,8 @@
 <div class="container-iconos" id="gradient-background">
     <div class="marca">
         <p class="icono">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                class="bi bi-box" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-box"
+                viewBox="0 0 16 16">
                 <path
                     d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
             </svg>
@@ -258,8 +270,8 @@
     </p>
     <div class="marca">
         <p class="icono">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                class="bi bi-truck" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-truck"
+                viewBox="0 0 16 16">
                 <path
                     d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
             </svg>
@@ -325,8 +337,7 @@
                             <div class="col-md-4 @if ($loop->iteration !== 2) d-none d-md-block @endif">
                                 <div class="card">
                                     <img src="{{ asset('storage/' . $producto->image) }}" class="img-fluid"
-                                        alt="{{ $producto->name }}"
-                                        style="height: 300px; width: 350px; object-fit: cover">
+                                        alt="{{ $producto->name }}" style="height: 300px; width: 350px; object-fit: cover">
                                     <div class="row justify-content-between">
                                         <p style="color: #A57268;">{{ $producto->name }}</p>
                                         <div class="col-4">
@@ -338,8 +349,8 @@
                                                         action="{{ route('cart.add', ['productId' => $producto->id, 'quantity' => 1]) }}">
                                                         @csrf
 
-                                                        <button type="submit" class="btn-collection"
-                                                            id="addToCartButton" data-id="{{ $producto->id }}">
+                                                        <button type="submit" class="btn-collection" id="addToCartButton"
+                                                            data-id="{{ $producto->id }}">
                                                             Agregar al carrito
                                                         </button>
                                                     </form>
@@ -360,12 +371,10 @@
             @endforeach
         </div>
         <!-- Controles -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProductos"
-            data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProductos" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselProductos"
-            data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselProductos" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
         </button>
     </div>
@@ -375,7 +384,7 @@
     <div class="row align-items-center custom-card">
         <div class="col-md-8">
             <h2 class="fw-bold text-secondary">{{ $categoria->category }}</h2>
-            <button class="btn btn-collection my-3">Ver Colección</button>
+            <a href="{{ url('/catalogue?categoria=' . urlencode($categoria->category)) }}" class="btn btn-collection my-3">Ver Colección</a>
             <p class="text-secondary">
                 @php
                     $mensajes = [
@@ -394,9 +403,8 @@
             </p>
         </div>
         <div class="col-md-4">
-            <img src="{{ asset('storage/' . $productoCategoria->image) }}"
-                alt="Producto de {{ $categoria->category }}" class="img-fluid rounded"
-                style="height: 300px; width: 300px; object-fit: cover">
+            <img src="{{ asset('storage/' . $productoCategoria->image) }}" alt="Producto de {{ $categoria->category }}"
+                class="img-fluid rounded" style="height: 300px; width: 300px; object-fit: cover">
         </div>
     </div>
 </div>
@@ -468,22 +476,21 @@
         <div class="row">
             <div class="col-6 col-md-2 mb-3">
                 <ul class="flex-column">
-                    <li> 
-                    <h5>Menu</h5>
+                    <li>
+                        <h5>Menu</h5>
                     </li>
-                    <li class="nav-item mb-2"><a href="{{ url('/catalogue') }}"
-                            class="nav-link p-0 foot">Todos los productos</a></li>
+                    <li class="nav-item mb-2"><a href="{{ url('/catalogue') }}" class="nav-link p-0 foot">Todos los
+                            productos</a></li>
                 </ul>
             </div>
 
             <div class="col-6 col-md-2 mb-3">
                 <ul class="flex-column">
                     <li>
-                    <h5>Categorias</h5>
+                        <h5>Categorias</h5>
                     </li>
                     <li class="nav-item mr-3">
-                        <a href="{{ url('/catalogue?categoria=Anime') }}"
-                            class="nav-link p-0 foot">Anime</a>
+                        <a href="{{ url('/catalogue?categoria=Anime') }}" class="nav-link p-0 foot">Anime</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="{{ url('/catalogue?categoria=Cosmética%20Natural') }}"
@@ -494,12 +501,10 @@
                             class="nav-link p-0 foot">Celebridades</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="{{ url('/catalogue?categoria=Aromáticas') }}"
-                            class="nav-link p-0 foot">Aromáticas</a>
+                        <a href="{{ url('/catalogue?categoria=Aromáticas') }}" class="nav-link p-0 foot">Aromáticas</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="{{ url('/catalogue?categoria=Todo') }}"
-                            class="nav-link p-0 foot">Todo</a>
+                        <a href="{{ url('/catalogue?categoria=Todo') }}" class="nav-link p-0 foot">Todo</a>
                     </li>
                 </ul>
             </div>
@@ -507,7 +512,7 @@
             <div class="col-6 col-md-2 mb-3">
                 <ul class="flex-column">
                     <li>
-                    <h5>Nuestra compañia</h5>
+                        <h5>Nuestra compañia</h5>
                     </li>
                     <li class="nav-item mb-2"><a href="{{ route('aboutus') }}" class="nav-link p-0 foot">Sobre
                             nosotras</a></li>
@@ -557,7 +562,7 @@
 <!-- Boostrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
+    </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -568,7 +573,7 @@
 </body>
 
 <script>
-    $(document).on('click', '#addToCartButton', function(event) {
+    $(document).on('click', '#addToCartButton', function (event) {
         event.preventDefault(); // Prevenir la acción por defecto
 
         var productId = $(this).data('id'); // Obtener el ID del producto desde el botón
@@ -581,14 +586,14 @@
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content') // Incluir el token CSRF
             },
-            success: function(response) {
+            success: function (response) {
                 Swal.fire({
                     icon: 'success',
                     title: '¡Producto agregado!',
                     text: response.message
                 });
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -598,18 +603,18 @@
         });
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Delegación de eventos para los botones de incremento y decremento
-        $('#miModal').on('click', '.btn-increment', function() {
+        $('#miModal').on('click', '.btn-increment', function () {
             var productId = $(this).data('product-id');
             var quantityInput = $('#quantity-' + productId);
             var currentQuantity = parseInt(quantityInput.val());
-            
+
             quantityInput.val(currentQuantity + 1);
             updateCartQuantity(productId, currentQuantity + 1);
         });
 
-        $('#miModal').on('click', '.btn-decrement', function() {
+        $('#miModal').on('click', '.btn-decrement', function () {
             var productId = $(this).data('product-id');
             var quantityInput = $('#quantity-' + productId);
             var currentQuantity = parseInt(quantityInput.val());
@@ -630,12 +635,12 @@
                 _token: '{{ csrf_token() }}',
                 quantity: quantity
             },
-            success: function(response) {
+            success: function (response) {
                 if (response.success) {
                     console.log('Cantidad actualizada con éxito');
                 }
             },
-            error: function() {
+            error: function () {
                 console.log('Error al actualizar la cantidad');
             }
         });
