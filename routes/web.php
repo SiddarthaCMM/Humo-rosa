@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,7 @@ Route::view('/about-us', 'aboutus')->name('aboutus');
 
 /*Contacto*/
 Route::view('/contacto', 'contacto')->name('contacto');
+Route::post('/contacto', [ContactoController::class, 'guardarMensaje'])->name('contacto.guardarMensaje');
 
 /*Configuración del perfil*/
 Route::view('/configuration', 'configuration')->name('configuration');
@@ -74,7 +76,6 @@ Route::view('/configuration', 'configuration')->name('configuration');
     Route::view('/configuration/configurar_direcciones', 'menu_compras.index_agregar_direccion')->name('direcciones');
     Route::view('/configuration/compras', 'menu_compras.index_compras')->name('compras');
     Route::view('/configuration/billetera', 'menu_compras.index_con_billetera')->name('billetera');
-
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/

@@ -12,6 +12,8 @@ use Orchid\Screen\Actions\Menu;
 use App\Orchid\Screens\ProductScreen;
 use Orchid\Platform\Screens\UserEditScreen;
 use App\Orchid\Screens\UserListScreen;
+use App\Orchid\Screens\MessageScreen;
+use App\Orchid\Screens\MessageDetailScreen;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -34,11 +36,15 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Contenido')
                 ->route('platform.products'),
 
-            
-            
+
+
             Menu::make('Usuarios Registrados')
                 ->icon('user')
                 ->route('platform.registered.users'),
+
+            Menu::make('Mensajes')
+                ->icon('notebook')
+                ->route('platform.messages'),
         ];
     }
 
@@ -78,5 +84,7 @@ class PlatformProvider extends OrchidServiceProvider
         // Ruta personalizada para tu pantalla de velas
         Route::screen('products', ProductScreen::class)->name('platform.products');
         Route::screen('users', UserListScreen::class)->name('platform.registered.users');
+        Route::screen('mensajes', MessageScreen::class)->name('platform.messages');
+        Route::screen('mensajes/{mensaje}', MessageDetailScreen::class)->name('platform.messages.show');  // Ruta para el detalle del mensaje
     }
 }

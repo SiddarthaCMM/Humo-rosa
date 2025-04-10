@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\ProductScreen;
 use App\Orchid\Screens\ProductEditScreen;
+use App\Orchid\Screens\MessageScreen;
+use App\Orchid\Screens\MessageDetailScreen;
 
 
 
@@ -26,6 +28,8 @@ Route::screen('registered-users', UserListScreen::class)->name('platform.registe
 Route::screen('products', \App\Orchid\Screens\ProductScreen::class)->name('platform.products');
 Route::screen('products/create', ProductEditScreen::class)->name('platform.products.create');
 Route::screen('products/{product}/edit', ProductEditScreen::class)->name('platform.products.edit');
+Route::screen('messages', MessageScreen::class)->name('platform.messages');
+Route::screen('messages/{mensaje}', MessageDetailScreen::class)->name('platform.messages.show');
 
 /*
 |--------------------------------------------------------------------------

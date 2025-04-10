@@ -56,7 +56,7 @@
         <button class="catalogoButton" onclick="marcarActivo(event)" data-categoria="Celebridades">Celebridades</button>
         <button class="catalogoButton" onclick="marcarActivo(event)" data-categoria="Aromáticas">Aromáticas</button>
         <button class="catalogoButton" onclick="marcarActivo(event)" data-categoria="Cosmética Natural">Cosmética Natural</button>
-        <button class="catalogoButton" onclick="marcarActivo(event)">Personalizado</button>
+        <a href="{{ route('contacto') }}" class="catalogoButton" onclick="marcarActivo(event)">Personalizado</a>
         <button class="catalogoButton" onclick="marcarActivo(event)">Por Temporada</button>
     </div>
 
