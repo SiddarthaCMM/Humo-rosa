@@ -8,7 +8,7 @@
 
 <style>
          body{
-        background-color:#CEE6F3;
+        background-color:#FFF5F5;
         font-family: "Onest", serif;
         font-optical-sizing: auto;
         font-weight: 500;
