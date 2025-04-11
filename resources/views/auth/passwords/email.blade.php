@@ -1,47 +1,80 @@
+@php
+    app()->instance('login_page', true);
+    app()->instance('password_reset_page', true);
+@endphp
+
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/stylesLogInRegister.css') }}">
+@endpush
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <a href="{{ route('home') }}" class="logo-login" title="Volver al inicio">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+        </svg>
+    </a>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <div class="reset-container" id="resetContainer">
+        <div class="form-card">
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+            <h1>¿Olvidaste tu contraseña?</h1>
+            <h2>Recupera tu acceso</h2>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+            {{-- Modal de éxito --}}
+            @if (session('status'))
+                <div class="modal-overlay" id="alertModal">
+                    <div class="modal-content">
+                        <p>{{ session('status') }}</p>
+                        <button class="modal-button"
+                            onclick="document.getElementById('alertModal').style.display = 'none'; document.body.classList.remove('modal-open');">
+                            Aceptar
+                        </button>
+                    </div>
                 </div>
+                <script>
+                    document.body.classList.add('modal-open');
+                </script>
+            @endif
+
+            {{-- Modal de error personalizado --}}
+            @if ($errors->has('email'))
+                @php
+                    $errorMsg = $errors->first('email');
+                    if ($errorMsg === "We can't find a user with that email address.") {
+                        $errorMsg = 'No pudimos encontrar un usuario con ese correo electrónico.';
+                    }
+                @endphp
+                <div class="modal-overlay" id="alertModal">
+                    <div class="modal-content">
+                        <p>{{ $errorMsg }}</p>
+                        <button class="modal-button"
+                            onclick="document.getElementById('alertModal').style.display = 'none'; document.body.classList.remove('modal-open');">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+                <script>
+                    document.body.classList.add('modal-open');
+                </script>
+            @endif
+
+            <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+
+                <label for="email">Correo electrónico</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required
+                    placeholder="Ingresa tu correo" autocomplete="email" autofocus>
+
+                <button type="submit" class="submitButton">Enviar enlace de recuperación</button>
+            </form>
+
+            <div class="user">
+                ¿Ya tienes cuenta? <a href="{{ route('login') }}">Inicia sesión</a>
             </div>
         </div>
     </div>
-</div>
 @endsection

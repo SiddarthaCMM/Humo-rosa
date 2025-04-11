@@ -241,6 +241,10 @@ input {
         transform: scale(1);
     }
 }
+
+/*-----------------------------------------------------
+| Olvidaste la contraseña card
+------------------------------------------------------*/
 .remember-container input[type="checkbox"] {
     width: auto;
     height: 16px;
@@ -254,4 +258,31 @@ input {
 }
 body.login-page {
     overflow: hidden;
+}
+
+.reset-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.reset-container .form-card {
+    margin-bottom: 0;
+}
+body.reset-page {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+.form-card {
+    background-color: #fbe9e9; /* fondo rosa suave */
+    padding: 40px 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00000010;
+    max-width: 600px;
+    min-height: 400px;
 }
