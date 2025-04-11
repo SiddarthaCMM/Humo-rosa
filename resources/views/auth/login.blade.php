@@ -90,12 +90,7 @@
                     ¿No tienes cuenta? <span id="showRegister">Regístrate</span>
                 </div>
 
-                <p class="text-muted">O continúa con</p>
-                <div class="social-login">
-                    <button>G</button>
-                    <button>f</button>
-                    <button></button>
-                </div>
+
             </div>
 
             {{-- BACK: Registro --}}
