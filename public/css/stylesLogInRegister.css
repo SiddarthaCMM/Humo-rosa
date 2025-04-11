@@ -36,20 +36,22 @@ body.login-page .svg {
 }
 
 /* Logo flotante en login */
-.logo-login {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
-}
-
-.logo-login img {
-    height: 60px;
+.logo-login svg {
+    color: #ffffff; /* blanco, puedes cambiarlo a rosa, dorado, etc */
+    width: 40px;
+    height: 40px;
     transition: transform 0.2s ease;
 }
 
-.logo-login:hover img {
-    transform: scale(1.05);
+.logo-login:hover svg {
+    transform: scale(1.1);
+    color: #f09090; /* color en hover */
+}
+.logo-login {
+    position: absolute;
+    top: 20px;
+    left: 40px; /* ajusta aquí lo pegado que está a la izquierda */
+    z-index: 100;
 }
 
 /*-----------------------------------------------------
@@ -90,6 +92,7 @@ body.login-page .svg {
     background-color: #fbe9e9;
     border-radius: 10px;
     box-shadow: 0 0 10px #00000010;
+    bottom: 30px;
 }
 
 .back {
@@ -122,12 +125,11 @@ input {
 }
 
 .remember-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #555;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    justify-content: flex-start;
 }
 
 .options {
@@ -189,4 +191,67 @@ input {
     background-color: #fff;
     box-shadow: 0 0 5px #ccc;
     cursor: pointer;
+}
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3); /* un poco más suave */
+    backdrop-filter: blur(3px); /* <-- Aquí el blur */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    overflow: hidden;
+    top: -24px;
+}
+
+.modal-content {
+    background-color: #fff0f0;
+    color: #721c24;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    animation: fadeInModal 0.3s ease-in-out;
+}
+
+.modal-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #d88989;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.modal-button:hover {
+    background-color: #b76a6a;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.remember-container input[type="checkbox"] {
+    width: auto;
+    height: 16px;
+    margin: 0;
+}
+
+.remember-container label {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+body.login-page {
+    overflow: hidden;
 }

@@ -10,29 +10,28 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    /**
-     * Redirección personalizada después del login.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param mixed $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function authenticated(Request $request, $user)
-    {
-        return redirect('/'); // Redirige al welcome.blade.php
-    }
-
-    /**
-     * Crea una nueva instancia del controlador.
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
 
+    // Cambia el campo por el que se hace login: 'name' en vez de 'email'
     public function username()
-    {   
-    return 'name';
+    {
+        return 'name';
     }
 
+    // Después del login exitoso
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect('/')->with('status', 'Inicio de sesión exitoso.');
+    }
+
+    // Cuando el login falla
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->with('error', 'Usuario o contraseña incorrectos.');
+    }
 }
