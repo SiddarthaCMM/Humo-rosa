@@ -37,15 +37,15 @@ body.login-page .svg {
 
 /* Logo flotante en login */
 .logo-login svg {
-    color: #ffffff; /* blanco, puedes cambiarlo a rosa, dorado, etc */
-    width: 40px;
-    height: 40px;
+    color: #f09090;
+    width: 55px;
+    height: 55px;
     transition: transform 0.2s ease;
 }
 
 .logo-login:hover svg {
     transform: scale(1.1);
-    color: #f09090; /* color en hover */
+    color: #ffffff;
 }
 .logo-login {
     position: absolute;
@@ -239,6 +239,17 @@ input {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+@media (max-width: 480px) {
+    .logo-login {
+        top: 10px;
+        left: 10px;
+    }
+
+    .logo-login svg {
+        width: 30px;
+        height: 30px;
     }
 }
 
