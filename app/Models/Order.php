@@ -25,4 +25,8 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_items') // Especifica el nombre de la tabla
                     ->withPivot('quantity', 'price'); // Campos adicionales en la tabla intermedia
     }
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

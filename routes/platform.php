@@ -21,6 +21,8 @@ use App\Orchid\Screens\ProductScreen;
 use App\Orchid\Screens\ProductEditScreen;
 use App\Orchid\Screens\MessageScreen;
 use App\Orchid\Screens\MessageDetailScreen;
+use App\Orchid\Screens\PaymentScreen;
+use App\Orchid\Screens\PaymentDetailScreen;
 
 
 
@@ -30,6 +32,8 @@ Route::screen('products/create', ProductEditScreen::class)->name('platform.produ
 Route::screen('products/{product}/edit', ProductEditScreen::class)->name('platform.products.edit');
 Route::screen('messages', MessageScreen::class)->name('platform.messages');
 Route::screen('messages/{mensaje}', MessageDetailScreen::class)->name('platform.messages.show');
+Route::screen('orders', PaymentScreen::class)->name('platform.orders');
+Route::screen('orders/{order}', PaymentDetailScreen::class)->name('platform.orders.show');
 
 /*
 |--------------------------------------------------------------------------

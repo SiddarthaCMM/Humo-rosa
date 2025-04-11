@@ -118,11 +118,12 @@ class PaymentController extends Controller
             'total' => $total,
         ]);
     
-        // Asociar los productos con la orden
+        // Asociar los productos con la orden usando orderItems()
         foreach ($cartProducts as $product) {
-            $order->products()->attach($product->id, [
+            $order->orderItems()->create([
+                'product_id' => $product->id,
                 'cantidad' => $product->quantity,
-                'precio_unitario' => $product->price, // <-- Cambio aquí
+                'precio_unitario' => $product->price,
             ]);
         }
     
@@ -130,6 +131,6 @@ class PaymentController extends Controller
         $user->cart->products()->detach(); // Vacía todos los productos del carrito
     
         // Redirigir a una página de confirmación o mostrar un mensaje de éxito
-        return back()->with('success', 'Pago procesado con éxito!');
+        return redirect('/')->with('success', 'Pago procesado con éxito!');
     }
 }

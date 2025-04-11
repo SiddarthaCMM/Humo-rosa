@@ -220,6 +220,7 @@ $(document).ready(function() {
 }
 
 document.getElementById('realizarPago').addEventListener('click', function () {
+        event.preventDefault();
         fetch("{{ route('payment.process') }}", {
             method: "POST",
             headers: {
