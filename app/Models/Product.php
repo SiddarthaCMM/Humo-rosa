@@ -27,4 +27,15 @@ class Product extends Model
     {
         return $this->Contenido ?? ''; // Devuelve el valor del campo 'Contenido'
     }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_items') // Especifica el nombre de la tabla
+                    ->withPivot('quantity', 'price'); // Campos adicionales en la tabla intermedia
+    }
 }
