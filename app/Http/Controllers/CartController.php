@@ -46,7 +46,7 @@ class CartController extends Controller
             ]);
         }
     
-        return response()->json(['message' => 'Producto agregado al carrito']);
+        return redirect('/catalogue')->with('success', 'Pago procesado con éxito!');
     }
 
     // Mostrar carrito

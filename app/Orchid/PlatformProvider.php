@@ -36,8 +36,6 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Contenido')
                 ->route('platform.products'),
 
-
-
             Menu::make('Usuarios Registrados')
                 ->icon('user')
                 ->route('platform.registered.users'),
@@ -45,6 +43,10 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Mensajes')
                 ->icon('notebook')
                 ->route('platform.messages'),
+
+            Menu::make('Ordenes')
+                ->icon('basket-loaded')
+                ->route('platform.orders'),
         ];
     }
 
@@ -86,5 +88,6 @@ class PlatformProvider extends OrchidServiceProvider
         Route::screen('users', UserListScreen::class)->name('platform.registered.users');
         Route::screen('mensajes', MessageScreen::class)->name('platform.messages');
         Route::screen('mensajes/{mensaje}', MessageDetailScreen::class)->name('platform.messages.show');  // Ruta para el detalle del mensaje
+        Route::screen('order', MessageScreen::class)->name('platform.messages');
     }
 }
