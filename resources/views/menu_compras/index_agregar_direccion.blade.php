@@ -224,10 +224,10 @@
 </style>
 
 <body>
-  <button class="btn btn-secondary" style="background-color: #e67571; border-color: #e67571;" onclick="window.history.back();">
+  <button class="col-6 btn btn-secondary" style="background-color: #e67571; border-color: #e67571;" onclick="window.history.back();">
     ⬅ Regresar
 </button>
-    <div class="container-fluid">
+    <div class="col-6 container-fluid">
         <div class="row">
             <div class="col-6 profile_data ">
                 <p class="title">Mis direcciones</p> <br>

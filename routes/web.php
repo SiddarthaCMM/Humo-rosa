@@ -70,6 +70,9 @@ Route::view('/about-us', 'aboutus')->name('aboutus');
 Route::view('/contacto', 'contacto')->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'guardarMensaje'])->name('contacto.guardarMensaje');
 
+/*Productos por Temporada*/
+Route::view('/temporada', 'temporada')->name('temporada');
+
 /*Configuración del perfil*/
 Route::middleware('auth')->group(function () {
     // Ruta para mostrar la página de configuración del perfil

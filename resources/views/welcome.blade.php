@@ -318,6 +318,64 @@
         </div>
 
         <div id="texto" class="col-auto text-center position-relative">
+            <p style="color: #A57268;">Categorias de Productos</p>
+        </div>
+
+        <div class="col">
+            <hr class="full-width-hr" style="color: #A57268;">
+        </div>
+    </div>
+</div>
+
+<!-- Custom Card -->
+@php
+    $categoriasTemporada = ['Temporada-Valentín', 'Temporada-Navidad', 'Temporada-Muertos'];
+    $categoriaValida = \App\Models\Product::whereNotIn('category', $categoriasTemporada)
+                        ->inRandomOrder()
+                        ->first();
+@endphp
+
+@if ($categoriaValida)
+    <div class="container my-5 col-auto">
+        <div class="row align-items-center custom-card">
+            <div class="col-md-8">
+                <h2 class="fw-bold text-secondary">{{ $categoriaValida->category }}</h2>
+                <a href="{{ url('/catalogue?categoria=' . urlencode($categoriaValida->category)) }}"
+                   class="btn btn-collection my-3">Ver Colección</a>
+                <p class="text-secondary">
+                    @php
+                        $mensajes = [
+                            'Anime' =>
+                                'Sumérgete en el mundo de tus series y personajes favoritos con nuestra colección inspirada en el anime. ¡Lleva la esencia de la cultura japonesa a tu rutina diaria!',
+                            'Celebridades' =>
+                                'Siente el glamour y la sofisticación de tus íconos favoritos con nuestra colección de velas inspiradas en celebridades. ¡Un toque de lujo para tu recamara!',
+                            'Aromáticas' =>
+                                'Despierta tus sentidos con nuestra colección de velas aromáticas. Fragancias envolventes y relajantes para ese ambiente perfecto.',
+                            'Cosmética Natural' =>
+                                '¡Descubre el ritual de belleza que tu piel merece! Nuevos y adorables diseños de jabones que aportan una nutrición exquisita a tu rutina.',
+                        ];
+                    @endphp
+
+                    {{ $mensajes[$categoriaValida->category] ?? 'Descubre nuestra colección exclusiva diseñada para el bienestar y la belleza de tu piel.' }}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <img src="{{ asset('storage/' . $categoriaValida->image) }}"
+                     alt="Producto de {{ $categoriaValida->category }}"
+                     class="img-fluid rounded"
+                     style="height: 300px; width: 300px; object-fit: cover">
+            </div>
+        </div>
+    </div>
+@endif
+
+<div class="container-fluid">
+    <div class="row position-relative">
+        <div class="col">
+            <hr class="full-width-hr" style="color: #9c2811;">
+        </div>
+
+        <div id="texto" class="col-auto text-center position-relative">
             <p style="color: #A57268;">Productos Destacados</p>
         </div>
 
@@ -379,31 +437,36 @@
         </button>
     </div>
 </div>
-<!-- Custom Card -->
+<br>
+<br>
+
+<div class="container-fluid">
+    <div class="row position-relative">
+        <div class="col">
+            <hr class="full-width-hr" style="color: #9c2811;">
+        </div>
+
+        <div id="texto" class="col-auto text-center position-relative">
+            <p style="color: #A57268;">Productos De Temporada</p>
+        </div>
+
+        <div class="col">
+            <hr class="full-width-hr" style="color: #A57268;">
+        </div>
+    </div>
+</div>
+
 <div class="container my-5 col-auto">
     <div class="row align-items-center custom-card">
         <div class="col-md-8">
-            <h2 class="fw-bold text-secondary">{{ $categoria->category }}</h2>
-            <a href="{{ url('/catalogue?categoria=' . urlencode($categoria->category)) }}" class="btn btn-collection my-3">Ver Colección</a>
+            <h2 class="fw-bold text-secondary">Colección de Temporada</h2>
+            <a href="{{ url('/temporada') }}" class="btn btn-collection my-3">Ver Colección</a>
             <p class="text-secondary">
-                @php
-                    $mensajes = [
-                        'Anime' =>
-                            'Sumérgete en el mundo de tus series y personajes favoritos con nuestra colección inspirada en el anime. ¡Lleva la esencia de la cultura japonesa a tu rutina diaria!',
-                        'Celebridades' =>
-                            'Siente el glamour y la sofisticación de tus íconos favoritos con nuestra colección de velas inspiradas en celebridades. ¡Un toque de lujo para tu recamara!',
-                        'Aromáticas' =>
-                            'Despierta tus sentidos con nuestra colección de velas aromáticas. Fragancias envolventes y relajantes para ese ambiente perfecto.',
-                        'Cosmética Natural' =>
-                            '¡Descubre el ritual de belleza que tu piel merece! Nuevos y adorables diseños de jabones que aportan una nutrición exquisita a tu rutina.',
-                    ];
-                @endphp
-
-                {{ $mensajes[$categoria->category] ?? 'Descubre nuestra colección exclusiva diseñada para el bienestar y la belleza de tu piel.' }}
+                Explora nuestras ediciones especiales por temporada: diseños únicos, aromas exclusivos y una experiencia limitada para cada época del año. ¡Haz de cada momento algo inolvidable!
             </p>
         </div>
         <div class="col-md-4">
-            <img src="{{ asset('storage/' . $productoCategoria->image) }}" alt="Producto de {{ $categoria->category }}"
+            <img src="{{ asset('assets/ImagenNavidad.jpg') }}" alt="Colección de Temporada"
                 class="img-fluid rounded" style="height: 300px; width: 300px; object-fit: cover">
         </div>
     </div>
