@@ -57,7 +57,6 @@
         <button class="catalogoButton" onclick="marcarActivo(event)" data-categoria="Aromáticas">Aromáticas</button>
         <button class="catalogoButton" onclick="marcarActivo(event)" data-categoria="Cosmética Natural">Cosmética Natural</button>
         <a href="{{ route('contacto') }}" class="catalogoButton" onclick="marcarActivo(event)">Personalizado</a>
-        <button class="catalogoButton" onclick="marcarActivo(event)">Por Temporada</button>
     </div>
 
     
@@ -226,6 +225,7 @@
 </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

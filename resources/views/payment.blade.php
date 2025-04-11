@@ -108,9 +108,12 @@
                 <p class="col-8">Total</p><p class="col-4" style="color: red;">${{ number_format($total, 2) }}</p>
             </div> 
 
-            <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="button" style="background-color: #DCB9B2;">Realizar Pago</button>
-            </div>
+            <form action="{{ route('payment.process') }}" method="POST">
+                @csrf
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit" id="realizarPago" style="background-color: #DCB9B2;">Realizar Pago</button>
+                </div>
+            </form>
         </div>
 
     </div> 
@@ -215,6 +218,40 @@ $(document).ready(function() {
         updateCartSummary();
     });
 }
+
+document.getElementById('realizarPago').addEventListener('click', function () {
+        fetch("{{ route('payment.process') }}", {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => {
+            if (response.ok) {
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'Tu pedido ha sido procesado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    // Redirigir al home o donde quieras
+                    window.location.href = "{{ route('home') }}";
+                });
+            } else {
+                throw new Error('Algo salió mal al procesar el pedido');
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Intentar de nuevo'
+            });
+        });
+    });
 </script>
 </body>
 @endsection

@@ -8,6 +8,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,8 @@ Route::post('/remove-from-cart/{productId}', [CartController::class, 'removeFrom
 Route::get('/payment', [PaymentController::class, 'getCartSummary'])->name('cart.summary');
 Route::get('/payment', [PaymentController::class, 'getCartSummary'])->name('payment');
 
+Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+
 /*Rutas Generales*/
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -69,6 +72,9 @@ Route::view('/about-us', 'aboutus')->name('aboutus');
 /*Contacto*/
 Route::view('/contacto', 'contacto')->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'guardarMensaje'])->name('contacto.guardarMensaje');
+
+/*Productos por Temporada*/
+Route::view('/temporada', 'temporada')->name('temporada');
 
 /*Configuración del perfil*/
 Route::middleware('auth')->group(function () {
@@ -83,6 +89,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/configuration/configurar_direcciones', 'menu_compras.index_agregar_direccion')->name('direcciones');
     Route::view('/configuration/compras', 'menu_compras.index_compras')->name('compras');
     Route::view('/configuration/billetera', 'menu_compras.index_con_billetera')->name('billetera');
+
 
 /*Ruta segura para obligar a iniciar sesión*/
 /*Todas las rutas que se coloquen aqui van a obligar al usuario a iniciar sesión*/
