@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +71,13 @@ Route::view('/contacto', 'contacto')->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'guardarMensaje'])->name('contacto.guardarMensaje');
 
 /*Configuración del perfil*/
-Route::view('/configuration', 'configuration')->name('configuration');
+Route::middleware('auth')->group(function () {
+    // Ruta para mostrar la página de configuración del perfil
+    Route::get('/configuration', [ProfileController::class, 'showConfiguration'])->name('configuration');
+
+    // Ruta para actualizar la foto de perfil
+    Route::put('/configuration', [ProfileController::class, 'update'])->name('profile.update');
+});
 
     /*Secundarios de configuración de Perfil*/
     Route::view('/configuration/configurar_direcciones', 'menu_compras.index_agregar_direccion')->name('direcciones');

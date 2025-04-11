@@ -59,7 +59,6 @@
       }
 
       .photo{
-        background-color: white;
         position: absolute;
         margin: auto;
         width: 11%;
@@ -331,71 +330,115 @@
                   </nav>
 
                    <!-- imagen de perfil -->
-              <div class="col-11">
-                <div class="perfil_view">
-                    <div class="photo container text-center">
-                      <img src="" alt=""/>
-                    </div>
-                  <button type="button" class="btn change_ph">Cambiar foto</button>
-                </div>
-              </div>
+                   <div class="col-11">
+                      <div class="perfil_view">
+                          <!-- Contenedor de la foto de perfil -->
+                          <div class="photo container text-center">
+                              <!-- Mostramos la foto de perfil actual, si existe -->
+                              <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('images/default-profile.png') }}" alt="Foto de perfil" class="img-fluid photo" style="width: 150px; height: 150px; object-fit: cover;">
+                          </div>
+
+                          <!-- Formulario para cambiar la foto -->
+                          <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                              @csrf
+                              @method('PUT')
+
+                              <!-- Input para cargar la nueva foto -->
+                              <input type="file" id="profile_picture" name="profile_picture" accept="image/*" style="display: none;" onchange="handleFileChange()">
+
+                              <!-- Botón de "Cambiar foto" que activará el input de archivo -->
+                              <button type="button" class="btn change_ph" onclick="document.getElementById('profile_picture').click()">Cambiar foto</button>
+
+                              <!-- Botón de submit para enviar el formulario -->
+                              <button type="submit" class="btn btn-primary" style="display: none;" id="submit_button">Actualizar foto</button>
+                          </form>
+                      </div>
+                  </div>
     </div>
      <!-- input de nombre -->
   </div>
     <div class="row">
-      <div class="col-6 profile_data ">
-        <p>Nombre</p>
-        <input class="form-control me-2 name" type="search" placeholder="Tu nombre" aria-label="search">
-      </div>
-      <div class="col-4">
-        <button type="button" class="btn btn-outline-primary cancel" id="btn">Cancelar</button>
-        <button type="button" id="btn" class="btn btn-primary save">
-          Guardar cambios
-        </button>
+    <div class="col-6 profile_data">
+          <p>Nombre</p>
+          <form action="{{ route('profile.update') }}" method="POST" id="update-name-form">
+              @csrf
+              @method('PUT')
+              <!-- Campo de entrada para el nombre -->
+              <input class="form-control me-2 name" type="text" placeholder="Tu nombre" name="name" value="{{ $user->name }}" aria-label="search">
+
+              <!-- Botón para guardar cambios de nombre -->
+              <button type="submit" class="btn btn-primary save mt-2" id="save-name-btn">Guardar nombre</button>
+          </form>
       </div>
       <hr class="line">
        <!--input de correo electrónico -->
-      <div class="col-6 profile_data">
-        <p>Correo electrónico</p>
-        <p>alan_escream99@hotmail.com</p>
-      </div>
-       <!-- boton con menu desplegable -->
-      <div class="col-4">      
-        <button type="button" id= "btn" class="btn btn-primary save" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Editar</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1>Cambiar email de inicio de sesión</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <small class="text-body-secondary">Si iniciaste sesión con Google o Facebook, usa este nuevo email para seguir iniciando sesión de esa manera..</small>
-                  <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Nuevo email:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                  </div>
-                  <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Confirmar email:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                  </div>
-                  <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Tu contraseña:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                    <small class="text-body-secondary"><a href="" >¿Olvidaste tu contraseña?</a></small>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary save" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary save">Cambiar</button>
-              </div>
-            </div>
-          </div>
+       <div class="col-6 profile_data">
+            <p>Correo electrónico</p>
+            <p>{{ $user->email }}</p>
         </div>
-      </div>
-      <hr class="line">
+        <!-- Botón con menú desplegable -->
+
+        <div class="col-4">
+          <button type="button" id="btn" class="btn btn-primary save" data-bs-toggle="modal" data-bs-target="#exampleModalCorreo">Editar</button>
+
+          <!-- Modal de edición del correo electrónico -->
+          <div class="modal fade" id="exampleModalCorreo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+                  <div class="modal-content" style="width: 100%; max-width: 500px;">
+                      <div class="modal-header">
+                          <h1>Cambiar email de inicio de sesión</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <!-- Formulario de actualización de correo -->
+                          <form action="{{ route('profile.update') }}" method="POST" id="update-email-form">
+                            @csrf
+                            @method('PUT')
+                            <small class="text-body-secondary">Si iniciaste sesión con Google o Facebook, usa este nuevo email para seguir iniciando sesión de esa manera.</small>
+                            <div class="mb-3">
+                                <label for="new_email" class="col-form-label">Nuevo email:</label>
+                                <input type="text" class="form-control" id="new_email" name="new_email" value="{{ old('new_email', $user->email) }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm_email" class="col-form-label">Confirmar email:</label>
+                                <input type="text" class="form-control" id="confirm_email" name="confirm_email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="col-form-label">Tu contraseña:</label>
+                                <input type="password" class="form-control" id="password" name="password">
+                                <small class="text-body-secondary"><a href="#">¿Olvidaste tu contraseña?</a></small>
+                            </div>
+                            <!-- Botones de guardar y cancelar dentro del formulario -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary save">Cambiar</button>
+                            </div>
+                        </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Popup de error si el email ya está en uso -->
+          @if ($errors->has('new_email'))
+              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+              <script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                      Swal.fire({
+                          icon: 'error',
+                          title: '¡Error!',
+                          text: '{{ $errors->first('new_email') }}',
+                          confirmButtonText: 'Cerrar'
+                      });
+
+                      // Reabrir el modal automáticamente si hubo error
+                      const modalCorreo = new bootstrap.Modal(document.getElementById('exampleModalCorreo'));
+                      modalCorreo.show();
+                  });
+              </script>
+          @endif
+        </div>
+        <hr class="line">
        <!-- input de contraseña -->
       <div class="col-6 profile_data">
         <p>Contraseña</p>
@@ -403,8 +446,8 @@
       </div>
        <!-- boton con menu desplegable -->
       <div class="col-4">
-        <button type="button" id= "btn" class="btn btn-primary save" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Editar</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <button type="button" id= "btn" class="btn btn-primary save" data-bs-toggle="modal" data-bs-target="#exampleModalContraseña" data-bs-whatever="">Editar</button>
+        <div class="modal fade" id="exampleModalContraseña" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -412,25 +455,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form>
-                  <small class="text-body-secondary">Si iniciaste sesión con Google o Facebook, usa este nuevo email para seguir iniciando sesión de esa manera..</small>
+              <form id="update-password-form" method="POST" action="{{ route('profile.update') }}">
+                  @csrf
+                  @method('PUT')
+                  <small class="text-body-secondary">Si iniciaste sesión con Google o Facebook, puedes establecer una nueva contraseña aquí.</small>
                   <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Tu correo:</label>
-                    <input type="text" class="form-control" id="recipient-name">
+                    <label for="current_password" class="col-form-label">Tu contraseña actual:</label>
+                    <input type="password" class="form-control" id="current_password" name="current_password" required>
                   </div>
                   <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Nueva contraseña:</label>
-                    <input type="text" class="form-control" id="recipient-name">
+                    <label for="new_password" class="col-form-label">Nueva contraseña:</label>
+                    <input type="password" class="form-control" id="new_password" name="new_password" required>
                   </div>
                   <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Confirmar contraseña:</label>
-                    <input type="text" class="form-control" id="recipient-name">
+                    <label for="confirm_password" class="col-form-label">Confirmar contraseña:</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary save" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary save">Cambiar</button>
                   </div>
                 </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary save" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary save">Cambiar</button>
               </div>
             </div>
           </div>
@@ -441,7 +486,12 @@
 
     </div>
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
  <!-- codigo que me copie de bootsrap que no entiendo -->
     <script>
@@ -465,6 +515,68 @@
       })
     }
 
+    function handleFileChange() {
+        const fileInput = document.getElementById('profile_picture');
+        const file = fileInput.files[0];
+        const validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+
+        if (file && !validExtensions.includes(file.type)) {
+            // Si el archivo no es de tipo .jpg, .jpeg o .png, mostramos el pop-up de SweetAlert2
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Por favor, sube una imagen en formato JPG, JPEG o PNG.',
+                confirmButtonText: 'Cerrar'
+            });
+
+            fileInput.value = ''; // Limpiamos el input para que el usuario pueda seleccionar otro archivo
+            document.getElementById('submit_button').style.display = 'none'; // Ocultamos el botón de submit
+        } else {
+            // Si el archivo es válido, mostramos el botón de submit
+            document.getElementById('submit_button').style.display = 'inline-block';
+        }
+    }
+
+        // Obtener el botón y el formulario
+    const saveBtn = document.getElementById('save-name-btn');
+    const updateNameForm = document.getElementById('update-name-form');
+
+    // Evento para el botón de guardar nombre
+    saveBtn.addEventListener('click', function(event) {
+        event.preventDefault();  // Prevenir el envío automático del formulario
+
+        // Mostrar el popup de confirmación con SweetAlert2
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Seguro que quieres cambiar tu nombre?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, guardar',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, enviar el formulario
+                updateNameForm.submit();
+            }
+        });
+    });
+
+    document.getElementById('update-email-form').addEventListener('submit', function(e) {
+        console.log('Formulario enviado');
+    });
+
   </script>
+
+  @if ($errors->any())
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+          Swal.fire({
+              icon: 'error',
+              title: '¡Error!',
+              text: '{{ $errors->first() }}',
+              confirmButtonText: 'Cerrar'
+          });
+      </script>
+  @endif
 </body>
 @endsection
