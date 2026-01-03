@@ -74,18 +74,21 @@ El sistema permite administrar información de forma estructurada mediante una i
 ## 🚀 Demo en línea
 (Aún no ha sido posible hacer el deploy)
 
-## 🖼️ Capturas del sistema
+## 🖼️ Capturas del sistema.
 
 ### 🔐 Login
 ![Login](images/login.png)
 <img width="1892" height="877" alt="image" src="https://github.com/user-attachments/assets/dcaf8dd7-4920-430f-b7c9-180325a4deb8" />
 
 
-### 📊 Dashboard
-![Dashboard](images/dashboard.png)
+### 🎨 Home Page
+![Home page](images/dashboard.png)
+<img width="1882" height="771" alt="image" src="https://github.com/user-attachments/assets/55969434-f4fd-49af-80a9-649b2ddb7cc2" />
 
-### 👤 Gestión de Usuarios
-![Usuarios](images/users.png)
+
+### 👤 Productos
+![Productos](images/users.png)
+<img width="1857" height="812" alt="image" src="https://github.com/user-attachments/assets/7f9dbbc5-39ed-4a3f-9664-66abbd3048a0" />
 
 ---
 
@@ -95,7 +98,6 @@ El sistema permite administrar información de forma estructurada mediante una i
 - **Base de datos:** MySQL  
 - **Frontend:** HTML, CSS, JavaScript  
 - **Servidor local:** Laragon  
-- **Deploy:** GitHub + Railway  
 - **Control de versiones:** Git
 
 ---
@@ -111,13 +113,3 @@ El sistema permite administrar información de forma estructurada mediante una i
 
 ---
 
-## 📁 Estructura del proyecto
-
-```text
-├── public/
-├── app/
-├── config/
-├── database/
-├── views/
-├── composer.json
-└── README.md
