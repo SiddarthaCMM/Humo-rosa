@@ -63,3 +63,61 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 "# Humo-rosa" 
+# 🌐 Sistema Web – CRM / Gestión de Usuarios
+
+Proyecto web desarrollado como parte de mi formación en **desarrollo web**, enfocado en la gestión de usuarios, autenticación y operaciones CRUD, utilizando **PHP y MySQL**.
+
+El sistema permite administrar información de forma estructurada mediante una interfaz clara y funcional.
+
+---
+
+## 🚀 Demo en línea
+(Aún no ha sido posible hacer el deploy)
+
+## 🖼️ Capturas del sistema
+
+### 🔐 Login
+![Login](images/login.png)
+<img width="1892" height="877" alt="image" src="https://github.com/user-attachments/assets/dcaf8dd7-4920-430f-b7c9-180325a4deb8" />
+
+
+### 📊 Dashboard
+![Dashboard](images/dashboard.png)
+
+### 👤 Gestión de Usuarios
+![Usuarios](images/users.png)
+
+---
+
+## ⚙️ Tecnologías utilizadas
+
+- **Backend:** PHP  
+- **Base de datos:** MySQL  
+- **Frontend:** HTML, CSS, JavaScript  
+- **Servidor local:** Laragon  
+- **Deploy:** GitHub + Railway  
+- **Control de versiones:** Git
+
+---
+
+## ✨ Funcionalidades principales
+
+- Autenticación de usuarios (login/logout)
+- Operaciones CRUD
+- Validaciones en servidor
+- Manejo de sesiones
+- Interfaz responsive
+- Arquitectura organizada (MVC / modular)
+
+---
+
+## 📁 Estructura del proyecto
+
+```text
+├── public/
+├── app/
+├── config/
+├── database/
+├── views/
+├── composer.json
+└── README.md
